@@ -3,7 +3,7 @@ package com.google.samples.apps.sunflower.http.bean
 class Lifestyle {
 
 
-    var heWeather6: List<HeWeather6Bean>? = null
+    var HeWeather6: List<HeWeather6Bean>? = null
 
     class HeWeather6Bean {
         /**
@@ -57,6 +57,7 @@ class Lifestyle {
              * type : comf
              */
 
+            var date: String? = null
             var brf: String? = null
             var txt: String? = null
             var type: String? = null

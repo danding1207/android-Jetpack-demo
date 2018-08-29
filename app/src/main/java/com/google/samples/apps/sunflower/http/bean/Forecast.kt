@@ -2,7 +2,7 @@ package com.google.samples.apps.sunflower.http.bean
 
 class Forecast {
 
-    var heWeather6: List<HeWeather6Bean>? = null
+    var HeWeather6: List<HeWeather6Bean>? = null
 
     class HeWeather6Bean {
         /**
@@ -69,7 +69,10 @@ class Forecast {
              * wind_sc : 微风
              * wind_spd : 5
              */
-
+            var sr: String? = null
+            var ss: String? = null
+            var mr: String? = null
+            var ms: String? = null
             var cond_code_d: String? = null
             var cond_code_n: String? = null
             var cond_txt_d: String? = null

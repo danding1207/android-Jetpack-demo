@@ -19,8 +19,6 @@ object ApiClient {
      */
     val dataService: DataService
         get() {
-            val dataService = initService(ApiConstants.baseUrl,
-                    DataService::class.java)
             return initService(ApiConstants.baseUrl,
                     DataService::class.java)
         }
@@ -39,15 +37,15 @@ object ApiClient {
      * @return
     </T> */
     private fun <T> initService(baseUrl: String, clazz: Class<T>): T {
-        return getRetrofitInstance().create(clazz)
+        return getRetrofitInstance(baseUrl).create(clazz)
     }
 
-    private fun getRetrofitInstance(): Retrofit {
+    private fun getRetrofitInstance(baseUrl: String): Retrofit {
         if (retrofitInstance == null) {
             synchronized(ApiClient::class.java) {
                 if (retrofitInstance == null) {
                     retrofitInstance = Retrofit.Builder()
-                            .baseUrl(ApiConstants.baseUrl)
+                            .baseUrl(baseUrl)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .client(getOkHttpClientInstance())

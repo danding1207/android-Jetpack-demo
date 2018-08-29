@@ -21,12 +21,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_weather"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text=""
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp" />
+
+    </ScrollView>
 
 </FrameLayout>

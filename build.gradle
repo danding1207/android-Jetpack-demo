@@ -44,6 +44,7 @@ buildscript {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
     }
 
     dependencies {
@@ -62,6 +63,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
     }
 }
 

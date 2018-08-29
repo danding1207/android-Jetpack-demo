@@ -1,97 +1,101 @@
-//package com.google.samples.apps.sunflower.http.bean
-//
-//class NowWeather {
-//
-//
-//    var results: List<ResultsBean>? = null
-//
-//    class ResultsBean {
-//        /**
-//         * location : {"id":"C23NB62W20TF","name":"西雅图","country":"US","timezone":"America/Los_Angeles","timezone_offset":"-07:00"}
-//         * now : {"text":"多云","code":"4","temperature":"14","feels_like":"14","pressure":"1018","humidity":"76","visibility":"16.09","wind_direction":"西北","wind_direction_degree":"340","wind_speed":"8.05","wind_scale":"2","clouds":"90","dew_point":"-12"}
-//         * last_update : 2015-09-25T22:45:00-07:00
-//         */
-//
-//        var location: LocationBean? = null
-//        var now: NowBean? = null
-//        var last_update: String? = null
-//
-//        class LocationBean {
-//            /**
-//             * id : C23NB62W20TF
-//             * name : 西雅图
-//             * country : US
-//             * timezone : America/Los_Angeles
-//             * timezone_offset : -07:00
-//             */
-//
-//            var id: String? = null
-//            var name: String? = null
-//            var country: String? = null
-//            var timezone: String? = null
-//            var timezone_offset: String? = null
-//
-//            override fun toString(): String {
-//                return "LocationBean(id=$id, name=$name, country=$country, timezone=$timezone, timezone_offset=$timezone_offset)"
-//            }
-//        }
-//
-//        class NowBean {
-//            /**
-//             * text : 多云
-//             * code : 4
-//             * temperature : 14
-//             * feels_like : 14
-//             * pressure : 1018
-//             * humidity : 76
-//             * visibility : 16.09
-//             * wind_direction : 西北
-//             * wind_direction_degree : 340
-//             * wind_speed : 8.05
-//             * wind_scale : 2
-//             * clouds : 90
-//             * dew_point : -12
-//             */
-//
-//            var text: String? = null
-//            var code: String? = null
-//            var temperature: String? = null
-//            var feels_like: String? = null
-//            var pressure: String? = null
-//            var humidity: String? = null
-//            var visibility: String? = null
-//            var wind_direction: String? = null
-//            var wind_direction_degree: String? = null
-//            var wind_speed: String? = null
-//            var wind_scale: String? = null
-//            var clouds: String? = null
-//            var dew_point: String? = null
-//
-//            override fun toString(): String {
-//                return "NowBean(text=$text, code=$code, temperature=$temperature, feels_like=$feels_like, pressure=$pressure, humidity=$humidity, visibility=$visibility, wind_direction=$wind_direction, wind_direction_degree=$wind_direction_degree, wind_speed=$wind_speed, wind_scale=$wind_scale, clouds=$clouds, dew_point=$dew_point)"
-//            }
-//
-//        }
-//
-//        override fun toString(): String {
-//            return "ResultsBean(location=${location.toString()}, now=${now.toString()}, last_update=$last_update)"
-//        }
-//
-//
-//    }
-//
-//    override fun toString(): String {
-//        val result =  StringBuilder()
-//        if (results!=null) {
-//            result.append("size=${results!!.size}  {")
-//            results!!.forEach {
-//                it-> result.append("[$it],")
-//            }
-//            result.append("}")
-//        }
-//        return result.toString()
-//    }
-//
-//
-//
-//}
+package com.google.samples.apps.sunflower.http.bean
+
+class NowWeather {
+
+
+    var HeWeather6: List<HeWeather6Bean>? = null
+
+    class HeWeather6Bean {
+        /**
+         * basic : {"cid":"CN101010100","location":"北京","parent_city":"北京","admin_area":"北京","cnty":"中国","lat":"39.90498734","lon":"116.40528870","tz":"8.0"}
+         * now : {"cond_code":"101","cond_txt":"多云","fl":"16","hum":"73","pcpn":"0","pres":"1017","tmp":"14","vis":"1","wind_deg":"11","wind_dir":"北风","wind_sc":"微风","wind_spd":"6"}
+         * status : ok
+         * update : {"loc":"2017-10-26 17:29","utc":"2017-10-26 09:29"}
+         */
+
+        var basic: BasicBean? = null
+        var now: NowBean? = null
+        var status: String? = null
+        var update: UpdateBean? = null
+
+        class BasicBean {
+            /**
+             * cid : CN101010100
+             * location : 北京
+             * parent_city : 北京
+             * admin_area : 北京
+             * cnty : 中国
+             * lat : 39.90498734
+             * lon : 116.40528870
+             * tz : 8.0
+             */
+
+            var cid: String? = null
+            var location: String? = null
+            var parent_city: String? = null
+            var admin_area: String? = null
+            var cnty: String? = null
+            var lat: String? = null
+            var lon: String? = null
+            var tz: String? = null
+        }
+
+        class NowBean {
+            /**
+             * cond_code : 101
+             * cond_txt : 多云
+             * fl : 16
+             * hum : 73
+             * pcpn : 0
+             * pres : 1017
+             * tmp : 14
+             * vis : 1
+             * wind_deg : 11
+             * wind_dir : 北风
+             * wind_sc : 微风
+             * wind_spd : 6
+             */
+
+            var cond_code: String? = null
+            var cond_txt: String? = null
+            var fl: String? = null
+            var hum: String? = null
+            var pcpn: String? = null
+            var pres: String? = null
+            var tmp: String? = null
+            var vis: String? = null
+            var wind_deg: String? = null
+            var wind_dir: String? = null
+            var wind_sc: String? = null
+            var wind_spd: String? = null
+            val cloud: String? = null
+
+            override fun toString(): String {
+                return "NowBean{" +
+                        "\ncond_code='" + cond_code + '\''.toString() +
+                        ", \ncond_txt='" + cond_txt + '\''.toString() +
+                        ", \nfl='" + fl + '\''.toString() +
+                        ", \nhum='" + hum + '\''.toString() +
+                        ", \npcpn='" + pcpn + '\''.toString() +
+                        ", \npres='" + pres + '\''.toString() +
+                        ", \ntmp='" + tmp + '\''.toString() +
+                        ", \nvis='" + vis + '\''.toString() +
+                        ", \nwind_deg='" + wind_deg + '\''.toString() +
+                        ", \nwind_dir='" + wind_dir + '\''.toString() +
+                        ", \nwind_sc='" + wind_sc + '\''.toString() +
+                        ", \nwind_spd='" + wind_spd + '\''.toString() +
+                        '}'.toString()
+            }
+        }
+
+        class UpdateBean {
+            /**
+             * loc : 2017-10-26 17:29
+             * utc : 2017-10-26 09:29
+             */
+
+            var loc: String? = null
+            var utc: String? = null
+        }
+    }
+}
