@@ -70,6 +70,9 @@ class NowWeather {
             var wind_spd: String? = null
             val cloud: String? = null
 
+            val type: String = "nowweather"
+
+
             override fun toString(): String {
                 return "NowBean{" +
                         "\ncond_code='" + cond_code + '\''.toString() +

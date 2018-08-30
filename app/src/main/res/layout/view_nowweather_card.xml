@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="12dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_cond_txt"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingPrefix"
+            tools:text="晴" />
+
+        <TextView
+            android:id="@+id/tv_fl"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_cond_txt"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cond_txt"
+            tools:ignore="MissingPrefix"
+            tools:text="体感温度：23" />
+
+        <TextView
+            android:id="@+id/tv_tmp"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_fl"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fl"
+            tools:ignore="MissingPrefix"
+            tools:text="温度：21" />
+
+        <TextView
+            android:id="@+id/tv_wind_deg"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_tmp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tmp"
+            tools:ignore="MissingPrefix"
+            tools:text="风向角度：305" />
+
+        <TextView
+            android:id="@+id/tv_wind_dir"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_wind_deg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wind_deg"
+            tools:ignore="MissingPrefix"
+            tools:text="风向：西北" />
+
+        <TextView
+            android:id="@+id/tv_wind_sc"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_wind_dir"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wind_dir"
+            tools:ignore="MissingPrefix"
+            tools:text="风力：3" />
+
+        <TextView
+            android:id="@+id/tv_wind_spd"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_wind_sc"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wind_sc"
+            tools:ignore="MissingPrefix"
+            tools:text="风速：15" />
+
+        <TextView
+            android:id="@+id/tv_hum"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_wind_spd"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wind_spd"
+            tools:ignore="MissingPrefix"
+            tools:text="相对湿度：40" />
+
+        <TextView
+            android:id="@+id/tv_pcpn"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_hum"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hum"
+            tools:ignore="MissingPrefix"
+            tools:text="降水量：0" />
+
+        <TextView
+            android:id="@+id/tv_pres"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_pcpn"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pcpn"
+            tools:ignore="MissingPrefix"
+            tools:text="大气压强：1020" />
+
+        <TextView
+            android:id="@+id/tv_vis"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_pres"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pres"
+            tools:ignore="MissingPrefix"
+            tools:text="能见度：10" />
+
+        <TextView
+            android:id="@+id/tv_cloud"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_vis"
+            app:layout_constraintTop_toBottomOf="@+id/tv_vis"
+            tools:ignore="MissingPrefix"
+            tools:text="云量：23" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

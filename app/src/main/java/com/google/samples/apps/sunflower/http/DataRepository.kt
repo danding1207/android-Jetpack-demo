@@ -1,9 +1,6 @@
 package com.google.samples.apps.sunflower.http
 
-import com.google.samples.apps.sunflower.http.bean.Forecast
-import com.google.samples.apps.sunflower.http.bean.Lifestyle
-import com.google.samples.apps.sunflower.http.bean.Location
-import com.google.samples.apps.sunflower.http.bean.NowWeather
+import com.google.samples.apps.sunflower.http.bean.*
 import io.reactivex.Observable
 
 object DataRepository {
@@ -21,7 +18,7 @@ object DataRepository {
 
 
     //可以操作Observable来筛选网络或者是本地数据
-    fun searchLocation(url: String): Observable<Location> {
+    fun searchLocation(url: String): Observable<WeatherLocation> {
         return ApiClient.dataService.searchLocation(url)
     }
 

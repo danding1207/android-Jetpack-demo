@@ -1,6 +1,11 @@
 package com.google.samples.apps.sunflower.http.bean
 
-class Location {
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+import com.google.samples.apps.sunflower.http.annotation.Ignore
+import com.google.samples.apps.sunflower.http.annotation.Map
+
+class WeatherLocation {
 
     var HeWeather6: List<HeWeather6Bean>? = null
 
@@ -34,6 +39,7 @@ class Location {
             var lat: String? = null
             var lon: String? = null
             var tz: String? = null
+            var cityType: String? = null
             var type: String? = null
         }
     }

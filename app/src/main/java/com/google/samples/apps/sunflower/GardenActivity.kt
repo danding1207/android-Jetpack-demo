@@ -21,12 +21,15 @@ import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.samples.apps.sunflower.databinding.ActivityGardenBinding
+import com.google.samples.apps.sunflower.utilities.MIInnerImageSetter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.tmall.wireless.tangram.TangramBuilder
 
 class GardenActivity : AppCompatActivity() {
 
@@ -49,6 +52,8 @@ class GardenActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
 
         Logger.addLogAdapter(AndroidLogAdapter())
+        TangramBuilder.init(this, MIInnerImageSetter(), ImageView::class.java)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

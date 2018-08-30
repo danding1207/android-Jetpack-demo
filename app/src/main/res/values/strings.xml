@@ -51,4 +51,14 @@
     <!-- Accessibility -->
     <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the 'My garden' and 'Plant list' screens.">Picture of plant</string>
 
+
+    <string name="tmpMax">最高温度： %1$s °C</string>
+    <string name="tmpMin">最低温度： %1$s °C</string>
+
+    <string name="windDeg">风向角度： %1$s °</string>
+    <string name="windDir">风向： %1$s</string>
+
+
+
+
 </resources>

@@ -17,6 +17,7 @@ class Lifestyle {
         var status: String? = null
         var update: UpdateBean? = null
         var lifestyle: List<LifestyleBean>? = null
+        var type: String = "lifestyle"
 
         class BasicBean {
             /**

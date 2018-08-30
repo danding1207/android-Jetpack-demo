@@ -16,6 +16,7 @@ class Forecast {
         var status: String? = null
         var update: UpdateBean? = null
         var daily_forecast: List<DailyForecastBean>? = null
+        var type: String = "forecast"
 
         class BasicBean {
             /**

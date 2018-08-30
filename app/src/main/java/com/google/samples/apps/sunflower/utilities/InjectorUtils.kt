@@ -17,12 +17,14 @@
 package com.google.samples.apps.sunflower.utilities
 
 import android.content.Context
+import android.support.v4.app.Fragment
 import com.google.samples.apps.sunflower.data.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
+import com.google.samples.apps.sunflower.viewmodels.WeatherViewModelFactory
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -49,6 +51,12 @@ object InjectorUtils {
         val repository = getPlantRepository(context)
         return PlantListViewModelFactory(repository)
     }
+
+    fun provideWeatherViewModelFactory(fragment: Fragment): WeatherViewModelFactory {
+        return WeatherViewModelFactory(fragment)
+    }
+
+
 
     fun providePlantDetailViewModelFactory(
         context: Context,

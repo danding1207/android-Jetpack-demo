@@ -2,9 +2,8 @@ package com.google.samples.apps.sunflower.http;
 
 import com.google.samples.apps.sunflower.http.bean.Forecast;
 import com.google.samples.apps.sunflower.http.bean.Lifestyle;
-import com.google.samples.apps.sunflower.http.bean.Location;
 import com.google.samples.apps.sunflower.http.bean.NowWeather;
-
+import com.google.samples.apps.sunflower.http.bean.WeatherLocation;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
@@ -14,7 +13,7 @@ public interface DataService {
 
 //    https://search.heweather.com/find?parameters
     @GET
-    Observable<Location> searchLocation(@Url String url);
+    Observable<WeatherLocation> searchLocation(@Url String url);
 
 //    https://free-api.heweather.com/s6/weather/now?parameters
     @GET

@@ -97,4 +97,12 @@ dependencies {
 
     implementation 'com.afollestad.material-dialogs:core:2.0.0-alpha05'
 
+    /** tangram 动态布局 */
+    implementation "com.alibaba.android:tangram:2.0.5"
+
+    /** smartrefreshlayout */
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14"
+
+
 }

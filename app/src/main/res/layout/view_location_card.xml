@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="12dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_cnty"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingPrefix"
+            tools:text="中国" />
+
+
+        <TextView
+            android:id="@+id/tv_location"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_cnty"
+            app:layout_constraintStart_toEndOf="@+id/tv_cnty"
+            tools:ignore="MissingPrefix"
+            tools:text="-北京" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_location"
+            app:layout_constraintStart_toEndOf="@+id/tv_location"
+            tools:ignore="MissingPrefix"
+            tools:text="城市" />
+
+        <TextView
+            android:id="@+id/tv_lat"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_cnty"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cnty"
+            tools:ignore="MissingPrefix"
+            tools:text="经度：39.90498734" />
+
+        <TextView
+            android:id="@+id/tv_lon"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_lat"
+            app:layout_constraintStart_toEndOf="@+id/tv_lat"
+            tools:ignore="MissingPrefix"
+            tools:text="纬度：116.4052887" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
