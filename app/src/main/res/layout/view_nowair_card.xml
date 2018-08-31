@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="12dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_pub_time"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingPrefix"
+            tools:text="数据发布时间: 2017-03-20 12:30" />
+
+        <TextView
+            android:id="@+id/tv_aqi"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_pub_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pub_time"
+            tools:ignore="MissingPrefix"
+            tools:text="空气质量指数：23" />
+
+        <TextView
+            android:id="@+id/tv_main"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_aqi"
+            app:layout_constraintTop_toBottomOf="@+id/tv_aqi"
+            tools:ignore="MissingPrefix"
+            tools:text="主要污染物：pm25" />
+
+        <TextView
+            android:id="@+id/tv_qlty"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_main"
+            app:layout_constraintTop_toBottomOf="@+id/tv_main"
+            tools:ignore="MissingPrefix"
+            tools:text="空气质量：良" />
+
+        <TextView
+            android:id="@+id/tv_pm10"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_qlty"
+            app:layout_constraintTop_toBottomOf="@+id/tv_qlty"
+            tools:ignore="MissingPrefix"
+            tools:text="pm10：24" />
+
+        <TextView
+            android:id="@+id/tv_pm25"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_pm10"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pm10"
+            tools:ignore="MissingPrefix"
+            tools:text="pm25：31" />
+
+        <TextView
+            android:id="@+id/tv_no2"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_pm25"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pm25"
+            tools:ignore="MissingPrefix"
+            tools:text="二氧化氮：15" />
+
+        <TextView
+            android:id="@+id/tv_so2"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_no2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_no2"
+            tools:ignore="MissingPrefix"
+            tools:text="二氧化硫：40" />
+
+        <TextView
+            android:id="@+id/tv_co"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_so2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_so2"
+            tools:ignore="MissingPrefix"
+            tools:text="一氧化碳：0" />
+
+        <TextView
+            android:id="@+id/tv_o3"
+            fontPath="fonts/fzltdb.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_co"
+            app:layout_constraintTop_toBottomOf="@+id/tv_co"
+            tools:ignore="MissingPrefix"
+            tools:text="臭氧：1020" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

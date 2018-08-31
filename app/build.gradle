@@ -26,20 +26,62 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "com.google.samples.apps.sunflower"
+        applicationId "com.msc.someweather"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         versionCode 1
-        versionName "0.1.5"
+        versionName "0.0.1"
         vectorDrawables.useSupportLibrary true
     }
+
+    flavorDimensions "api"
+
+    productFlavors {
+        official {
+            dimension "api"
+//            buildConfigField "String", "Httpurlip", "\"https://www.jiaoyibao.com.cn\""
+//            buildConfigField "String", "Receivepayurl2", "\"https://www.99bill.com/gwfnotify/notifyMerchant.htm\""
+        }//官方渠道
+    }
+
+    signingConfigs {
+        release {
+            try {
+                storeFile file("./sign/msc")
+                storePassword "123456"
+                keyAlias "msc"
+                keyPassword "123456"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def today = new Date()
+            outputFileName = "someweather_" +
+                    "${variant.buildType.name}_" +
+                    "${variant.productFlavors[0].name}_" +
+                    "v${variant.versionName}_" +
+                    today.format('yyyyMMdd') +".apk"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -104,5 +146,5 @@ dependencies {
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14"
     implementation "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14"
 
-
+    implementation 'com.amap.api:location:4.2.0'
 }

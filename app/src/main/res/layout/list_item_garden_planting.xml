@@ -20,7 +20,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
+            type="com.msc.someweather.viewmodels.PlantAndGardenPlantingsViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

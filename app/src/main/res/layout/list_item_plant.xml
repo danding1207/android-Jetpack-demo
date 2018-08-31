@@ -25,7 +25,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="plant"
-            type="com.google.samples.apps.sunflower.data.Plant"/>
+            type="com.msc.someweather.data.Plant"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

@@ -17,11 +17,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@+id/garden_fragment">
+    app:startDestination="@+id/weather_fragment">
 
     <fragment
         android:id="@+id/garden_fragment"
-        android:name="com.google.samples.apps.sunflower.GardenFragment"
+        android:name="com.msc.someweather.GardenFragment"
         android:label="@string/my_garden_title"
         tools:layout="@layout/fragment_garden">
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/plant_list_fragment"
-        android:name="com.google.samples.apps.sunflower.PlantListFragment"
+        android:name="com.msc.someweather.PlantListFragment"
         android:label="@string/plant_list_title"
         tools:layout="@layout/fragment_plant_list">
         <action
@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/plant_detail_fragment"
-        android:name="com.google.samples.apps.sunflower.PlantDetailFragment"
+        android:name="com.msc.someweather.PlantDetailFragment"
         android:label="@string/plant_details_title"
         tools:layout="@layout/fragment_plant_detail">
         <argument
@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/weather_fragment"
-        android:name="com.google.samples.apps.sunflower.WeatherFragment"
+        android:name="com.msc.someweather.WeatherFragment"
         android:label="@string/weather_title"
         tools:layout="@layout/fragment_weather"></fragment>
 
