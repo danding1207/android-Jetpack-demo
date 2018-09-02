@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,13 +29,175 @@
             android:id="@+id/refreshHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:mhPrimaryColor="@color/colorPrimary"
-            />
+            app:mhShowBezierWave="false" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout_left"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_title"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="120dp"
+                android:layout_marginTop="100dp"
+                android:textColor="@color/black"
+                android:textSize="38sp"
+                android:typeface="monospace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix"
+                tools:text="桥" />
+
+            <TextView
+                android:id="@+id/tv_wind"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="24dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingPrefix"
+                tools:text="东南风" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_wind"
+                app:layout_constraintStart_toStartOf="@+id/tv_wind"
+                tools:ignore="MissingPrefix"
+                tools:text="晴" />
+
+            <TextView
+                android:id="@+id/tv_tmp"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_name"
+                app:layout_constraintStart_toEndOf="@+id/tv_name"
+                tools:ignore="MissingPrefix"
+                tools:text="23℃" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="280dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="8dp"
+                android:ems="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_bg"
+                app:layout_constraintEnd_toEndOf="@+id/iv_bg"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix"
+                tools:text="受到法国军事大国发生" />
+
+            <TextView
+                android:id="@+id/tv_description_sub"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="24dp"
+                android:ems="1"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_description"
+                app:layout_constraintTop_toTopOf="@+id/tv_description"
+                tools:ignore="MissingPrefix"
+                tools:text="受到法国军事大国发生" />
+
+            <TextView
+                android:id="@+id/tv_tmp_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_wind"
+                fontPath="fonts/wygdmct.otf"
+                tools:ignore="MissingPrefix"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_wind"
+                tools:text="16℃ - 23℃" />
+
+            <TextView
+                android:id="@+id/tv_aqi"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_tmp_range"
+                app:layout_constraintStart_toEndOf="@+id/tv_tmp_range"
+                tools:ignore="MissingPrefix"
+                tools:text="空气质量：优" />
+
+            <TextView
+                android:id="@+id/tv_ultraviolet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_aqi"
+                app:layout_constraintStart_toEndOf="@+id/tv_aqi"
+                tools:ignore="MissingPrefix"
+                tools:text="紫外线：弱"
+                fontPath="fonts/wygdmct.otf"
+
+                />
+
+            <!--<com.msc.someweather.view.TextViewVertical-->
+                <!--android:id="@+id/tv_description"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:layout_marginEnd="60dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--app:v_cutChars=""-->
+                <!--app:v_start="right"-->
+                <!--app:v_text=""-->
+                <!--app:v_textColor="@color/black"-->
+                <!--app:v_textSize="20sp"-->
+                <!--app:layout_constraintBottom_toBottomOf="@+id/iv_bg"-->
+                <!--app:layout_constraintEnd_toEndOf="@+id/iv_bg"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--/>-->
+
+
+        </android.support.constraint.ConstraintLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

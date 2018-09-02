@@ -38,7 +38,7 @@ class CaiYunWeather {
 
         var hourly: HourlyBean? = null
         var realtime: RealtimeBean? = null
-        var forecast_keypoDouble: String? = null
+        var forecast_keypoint: String? = null
         var primary: Double = 0.toDouble()
         var daily: DailyBean? = null
         var alert: AlertBean? = null
@@ -193,7 +193,7 @@ class CaiYunWeather {
             var pm10: Double = 0.toDouble()
             var skycon: String? = null
             var cloudrate: Double = 0.toDouble()
-            var aqi: Double = 0.toDouble()
+            var aqi: Int = 0
             var comfort: ComfortBean? = null
             var no2: Double = 0.toDouble()
             var visibility: Double = 0.toDouble()

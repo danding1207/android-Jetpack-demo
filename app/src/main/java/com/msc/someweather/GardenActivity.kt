@@ -16,6 +16,7 @@
 
 package com.msc.someweather
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
@@ -31,6 +32,10 @@ import com.msc.someweather.utilities.MIInnerImageSetter
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.tmall.wireless.tangram.TangramBuilder
+import io.github.inflationx.calligraphy3.CalligraphyConfig
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor
+import io.github.inflationx.viewpump.ViewPump
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 class GardenActivity : AppCompatActivity() {
 
@@ -54,7 +59,13 @@ class GardenActivity : AppCompatActivity() {
 
         Logger.addLogAdapter(AndroidLogAdapter())
         TangramBuilder.init(this, MIInnerImageSetter(), ImageView::class.java)
-
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(CalligraphyInterceptor(
+                        CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/wygdmct.otf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build())
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -68,6 +79,10 @@ class GardenActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase))
     }
 
 }

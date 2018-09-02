@@ -147,4 +147,9 @@ dependencies {
     implementation "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14"
 
     implementation 'com.amap.api:location:4.2.0'
+
+    /** inflationx 自定义字体 */
+    implementation "io.github.inflationx:calligraphy3:3.0.0"
+    implementation "io.github.inflationx:viewpump:1.0.0"
+
 }

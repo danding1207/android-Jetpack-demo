@@ -140,6 +140,8 @@ class WeatherViewModel(private val fragment: Fragment) : ViewModel() {
                             option.isNeedAddress = true
                             //关闭缓存机制
                             option.isLocationCacheEnable = false
+                            //设置是否允许模拟位置,默认为true，允许模拟位置
+                            option.isMockEnable = true
                             //给定位客户端对象设置定位参数
                             mLocationClient.setLocationOption(option)
                             //启动定位
