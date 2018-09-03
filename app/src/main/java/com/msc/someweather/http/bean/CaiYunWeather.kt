@@ -579,7 +579,29 @@ class CaiYunWeather {
              */
 
             var status: String? = null
-            var content: List<*>? = null
+            var content: List<AlertContentBean>? = null
+
+
+            class AlertContentBean {
+
+                var province: String? = null
+                var status: String? = null
+                var description: String? = null
+                var alertId: String? = null
+                var city: String? = null
+                var adcode: String? = null
+                var pubtimestamp: Long = 0
+                var county: String? = null
+                var source: String? = null
+                var request_status: String? = null
+                var location: String? = null
+                var title: String? = null
+                var regionId: String? = null
+                var latlon: List<Double>? = null
+                var code: String? = null
+
+            }
+
         }
 
         class MinutelyBean {

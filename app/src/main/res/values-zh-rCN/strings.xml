@@ -16,13 +16,15 @@
 
 <resources>
 
-    <string name="app_name"></string>
-    <string name="navigation_drawer_header_title" translatable="false"></string>
+    <string name="app_name">某天气</string>
+    <string name="navigation_drawer_header_title"></string>
 
     <string name="menu_filter_by_grow_zone">按生长区筛选</string>
     <string name="plant_detail_image_content_description">植物图片</string>
     <string name="my_garden_title">我的花园</string>
     <string name="weather_title" />
+    <string name="alert_title" >天气预警</string>
+
     <string name="plant_list_title">植物目录</string>
     <string name="plant_details_title">植物介绍</string>
     <string name="navigation_drawer_header_content_description">导航抽屉页眉</string>

@@ -61,6 +61,30 @@
         android:id="@+id/weather_fragment"
         android:name="com.msc.someweather.WeatherFragment"
         android:label="@string/weather_title"
-        tools:layout="@layout/fragment_weather"></fragment>
+        tools:layout="@layout/fragment_weather">
+
+        <action
+            android:id="@+id/action_weather_fragment_to_alert_fragment"
+            app:destination="@id/alert_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/alert_fragment"
+        android:name="com.msc.someweather.AlertFragment"
+        android:label="@string/alert_title"
+        tools:layout="@layout/fragment_alert">
+
+        <argument
+            android:name="alertList"
+            app:argType="string" />
+
+    </fragment>
+
+
 
 </navigation>

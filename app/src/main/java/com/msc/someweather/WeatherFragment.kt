@@ -20,15 +20,21 @@ import android.Manifest
 import android.app.Dialog
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.location.Criteria
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.*
+import androidx.navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.amap.api.location.AMapLocation
 import com.google.gson.Gson
@@ -82,6 +88,9 @@ class WeatherFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         refreshHeader.setColorSchemeResources(R.color.black)
+
+        refreshLayout.setEnableLoadMore(false)
+
 //        refreshHeader.setShowBezierWave(true)
 
 //        builder = TangramBuilder.newInnerBuilder(view.context)
@@ -99,11 +108,11 @@ class WeatherFragment : Fragment() {
 //        engine.enableAutoLoadMore(true)
 ////        engine.addSimpleClickSupport(SampleClickSupport())
 //
-//        //Step 9: set an offset to fix card
-//        refreshLayout.setOnRefreshListener { refreshlayout ->
-//            result.clear()
-//            viewModel.getLocation()
-//        }
+        //Step 9: set an offset to fix card
+        refreshLayout.setOnRefreshListener { refreshlayout ->
+
+            viewModel.getLocation()
+        }
 //        refreshLayout.setOnLoadMoreListener { refreshlayout ->
 ////            viewModel.getMoreData()
 //        }
@@ -127,26 +136,36 @@ class WeatherFragment : Fragment() {
             tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
 
 
-            val simpleDateFormat =  SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE)
+            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE)
             val date = Date(System.currentTimeMillis())
 
 
             Logger.e("Date: ${simpleDateFormat.format(date)}")
 
-            val dailytmp = bean.result!!.daily!!.temperature!!.first{
+            val dailytmp = bean.result!!.daily!!.temperature!!.first {
                 it.date == simpleDateFormat.format(date)
             }
 
             tv_tmp_range.text = "${dailytmp.min}℃ - ${dailytmp.max}"
 
-            tv_aqi.text = "空气质量：${UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)}"
+            tv_aqi.text = UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)
 
-            tv_ultraviolet.text = "紫外线：${bean.result!!.realtime!!.ultraviolet!!.desc}"
+            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
+                    ColorStateList.valueOf(Color.WHITE)))
+
+            tv_aqi.visibility = View.VISIBLE
+            iv_aqi.visibility = View.VISIBLE
+
+//            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
+//                    ColorStateList.valueOf(UnitUtils.aqiToColor(activity!!, bean.result!!.realtime!!.aqi))))
 
 
-            if(bean.result!!.forecast_keypoint!=null && bean.result!!.forecast_keypoint!!.length>12) {
-                val head = bean.result!!.forecast_keypoint!!.substring(0 , bean.result!!.forecast_keypoint!!.length/2)
-                val foot = bean.result!!.forecast_keypoint!!.substring(bean.result!!.forecast_keypoint!!.length/2 , bean.result!!.forecast_keypoint!!.length)
+            tv_ultraviolet.text = "紫外线:${bean.result!!.realtime!!.ultraviolet!!.desc}"
+
+
+            if (bean.result!!.forecast_keypoint != null && bean.result!!.forecast_keypoint!!.length > 12) {
+                val head = bean.result!!.forecast_keypoint!!.substring(0, bean.result!!.forecast_keypoint!!.length / 2)
+                val foot = bean.result!!.forecast_keypoint!!.substring(bean.result!!.forecast_keypoint!!.length / 2, bean.result!!.forecast_keypoint!!.length)
                 tv_description.text = head
                 tv_description_sub.text = foot
             } else {
@@ -156,46 +175,92 @@ class WeatherFragment : Fragment() {
 
             val num = (Math.random() * 9).toInt()
 
-            when(num) {
-                0-> {
+            if (bean.result!!.alert != null
+                    && "ok" == bean.result!!.alert!!.status
+                    && bean.result!!.alert!!.content != null
+                    && bean.result!!.alert!!.content!!.isNotEmpty()) {
+                tv_alert.visibility = View.VISIBLE
+                iv_alert.visibility = View.VISIBLE
+                ll_alert.visibility = View.VISIBLE
+
+                ll_alert.setOnClickListener {
+
+                    val direction = WeatherFragmentDirections.
+                            ActionWeatherFragmentToAlertFragment(
+                                    Gson().toJson(
+                                            bean.result!!.alert!!.content))
+
+                    view!!.findNavController().navigate(direction)
+
+                }
+
+
+                var levelColor = Color.WHITE
+
+//                bean.result!!.alert!!.content!!.forEach{
+//                    if (it.title!=null && it.title!!.contains("蓝色")) {
+//                        levelColor = Color.BLUE
+//                    } else if (it.title!=null && it.title!!.contains("黄色")) {
+//                        levelColor = Color.YELLOW
+//                    } else if (it.title!=null && it.title!!.contains("橙色")) {
+//                        levelColor = ContextCompat.getColor(activity!!, R.color.orange)
+//                    } else if (it.title!=null && it.title!!.contains("红色")) {
+//                        levelColor = Color.RED
+//                    }
+//                }
+
+
+                iv_alert.setImageDrawable(tintDrawable(iv_alert.drawable,
+                        ColorStateList.valueOf(levelColor)))
+
+
+            } else {
+                iv_alert.visibility = View.INVISIBLE
+                tv_alert.visibility = View.INVISIBLE
+                ll_alert.visibility = View.VISIBLE
+
+            }
+
+            when (num) {
+                0 -> {
                     iv_bg.setImageResource(R.drawable.qiao)
                     tv_title.text = "桥"
                 }
-                1-> {
+                1 -> {
                     iv_bg.setImageResource(R.drawable.yu)
                     tv_title.text = "鱼"
                 }
-                2-> {
+                2 -> {
                     iv_bg.setImageResource(R.drawable.yan)
                     tv_title.text = "雁"
 
                 }
-                3-> {
+                3 -> {
                     iv_bg.setImageResource(R.drawable.que)
                     tv_title.text = "雀"
 
                 }
-                4-> {
+                4 -> {
                     iv_bg.setImageResource(R.drawable.nuan)
                     tv_title.text = "峦"
 
                 }
-                5-> {
+                5 -> {
                     iv_bg.setImageResource(R.drawable.mei)
                     tv_title.text = "梅"
 
                 }
-                6-> {
+                6 -> {
                     iv_bg.setImageResource(R.drawable.zhou)
                     tv_title.text = "舟"
 
                 }
-                7-> {
+                7 -> {
                     iv_bg.setImageResource(R.drawable.she)
                     tv_title.text = "舍"
 
                 }
-                8-> {
+                8 -> {
                     iv_bg.setImageResource(R.drawable.lan)
                     tv_title.text = "兰"
 
@@ -211,7 +276,6 @@ class WeatherFragment : Fragment() {
         })
 
     }
-
 
 
     override fun onDestroy() {
@@ -241,5 +305,10 @@ class WeatherFragment : Fragment() {
                 else "${this.location!!.district}-${this.location!!.aoiName}"
     }
 
+    fun tintDrawable(drawable: Drawable, colors: ColorStateList): Drawable {
+        val wrappedDrawable = DrawableCompat.wrap(drawable)
+        DrawableCompat.setTintList(wrappedDrawable, colors)
+        return wrappedDrawable
+    }
 
 }

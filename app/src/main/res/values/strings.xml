@@ -17,7 +17,7 @@
 <resources>
 
     <!-- Resources that do not require translation -->
-    <string name="app_name" ></string>
+    <string name="app_name" >SomeWeather</string>
     <string name="navigation_drawer_header_title" ></string>
 
     <!-- Translatable resources -->
@@ -26,7 +26,12 @@
     <string name="my_garden_title" translation_description="Title for the 'My garden' screen where the user can see the list of plants that have been added to their garden.">My garden</string>
     <string name="plant_list_title" translation_description="Title for the plant list screen where the user can see a list of plants available to add to their garden.">Plant list</string>
     <string name="plant_details_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">Plant details</string>
-    <string name="weather_title" />
+    <string name="weather_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant."/>
+
+    <string name="alert_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">
+    Alert</string>
+
+
 
     <string name="navigation_drawer_header_content_description" translation_description="Content description for the image that is shown at the top of the navigation drawer.">Navigation drawer header logo</string>
     <string name="added_plant_to_garden" translation_description="Confirmation text that is shown when a user adds a plant to their graden.">Added plant to garden</string>

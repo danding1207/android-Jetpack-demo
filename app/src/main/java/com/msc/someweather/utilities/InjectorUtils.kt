@@ -21,10 +21,7 @@ import android.support.v4.app.Fragment
 import com.msc.someweather.data.AppDatabase
 import com.msc.someweather.data.GardenPlantingRepository
 import com.msc.someweather.data.PlantRepository
-import com.msc.someweather.viewmodels.GardenPlantingListViewModelFactory
-import com.msc.someweather.viewmodels.PlantDetailViewModelFactory
-import com.msc.someweather.viewmodels.PlantListViewModelFactory
-import com.msc.someweather.viewmodels.WeatherViewModelFactory
+import com.msc.someweather.viewmodels.*
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.
@@ -54,6 +51,11 @@ object InjectorUtils {
 
     fun provideWeatherViewModelFactory(fragment: Fragment): WeatherViewModelFactory {
         return WeatherViewModelFactory(fragment)
+    }
+
+
+    fun provideAlertViewModelFactory(fragment: Fragment): AlertViewModelFactory {
+        return AlertViewModelFactory(fragment)
     }
 
 

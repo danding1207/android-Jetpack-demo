@@ -23,8 +23,27 @@
 
     <color name="tra">#00FFFFFF</color>
 
+    <color name="gray">#F0F0F0</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="black_aphal_9">#99000000</color>
+
+
+    <color name="red">#FF0000</color>
+    <color name="blue">#33CCFF</color>
+    <color name="green">#00FF00</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="orange">#FF6600</color>
+
+
+    <color name="aqi_1">#00FF00</color>
+    <color name="aqi_2">#FFFF00</color>
+    <color name="aqi_3">#FF6600</color>
+    <color name="aqi_4">#FF0000</color>
+    <color name="aqi_5">#CC6699</color>
+    <color name="aqi_6">#660066</color>
 
 
 

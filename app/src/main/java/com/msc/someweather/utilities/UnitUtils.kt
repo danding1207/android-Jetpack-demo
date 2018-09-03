@@ -1,5 +1,10 @@
 package com.msc.someweather.utilities
 
+import android.content.Context
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
+import com.msc.someweather.R
+
 object UnitUtils {
 
 
@@ -50,5 +55,16 @@ object UnitUtils {
         }
     }
 
+    fun aqiToColor(context: Context, aqi: Int): Int {
+        return when (aqi / 50) {
+            0 -> ContextCompat.getColor(context, R.color.aqi_1)
+            1 -> ContextCompat.getColor(context, R.color.aqi_2)
+            2 -> ContextCompat.getColor(context, R.color.aqi_3)
+            3 -> ContextCompat.getColor(context, R.color.aqi_4)
+            4, 5 -> ContextCompat.getColor(context, R.color.aqi_5)
+            6,7,8,9,10 -> ContextCompat.getColor(context, R.color.aqi_6)
+            else -> ContextCompat.getColor(context, R.color.aqi_1)
+        }
+    }
 
 }
