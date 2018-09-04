@@ -37,6 +37,10 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
+
+
 
 /**
  * The ViewModel for [WeatherFragment].
@@ -108,6 +112,8 @@ class WeatherViewModel(private val fragment: Fragment) : ViewModel() {
     fun getLocation() {
         Logger.d("start_getLocation")
 
+        if (!fragment.isAdded) return
+
         RxPermissions(fragment)
                 .requestEach(Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -172,15 +178,23 @@ class WeatherViewModel(private val fragment: Fragment) : ViewModel() {
 
     private fun getCaiYunWeather(latitude: Double, longitude: Double) {
 
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, -1) //向前走一天
+        calendar.set(Calendar.HOUR, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val date = calendar.time
+
         val url = HttpUtils.getUrl("http://api.caiyunapp.com/v2/Y2FpeXVuIGFuZHJpb2QgYXBp/$longitude,$latitude/weather",
                 mapOf("lang" to "zh_CN",
                         "span" to "16",
-                        "begin" to "1535558400",
+                        "begin" to "${date.time/1000}",
                         "hourlysteps" to "384",
                         "alert" to "true",
                         "tzshift" to "28800",
                         "version" to "4.0.1",
-                        "device_id" to "867601030981778") as HashMap)
+                        "device_id" to "898601030981778") as HashMap)
 
         DataRepository.getCaiYunWeather(url)
                 .subscribeOn(Schedulers.io())

@@ -17,17 +17,16 @@
 package com.msc.someweather.adapters
 
 import android.support.v7.util.DiffUtil
-import com.msc.someweather.http.bean.Lifestyle.HeWeather6Bean.LifestyleBean
+import com.msc.someweather.http.bean.Lifestyle
 
-class LifestyleDiffCallback : DiffUtil.ItemCallback<LifestyleBean>() {
+class LifestyleDiffCallback : DiffUtil.ItemCallback<Lifestyle>() {
 
-    override fun areItemsTheSame(oldItem: LifestyleBean, newItem: LifestyleBean): Boolean {
-        return oldItem.brf == newItem.brf
-                && oldItem.txt == newItem.txt
+    override fun areItemsTheSame(oldItem: Lifestyle, newItem: Lifestyle): Boolean {
+        return oldItem.desc == newItem.desc
                 && oldItem.type == newItem.type
     }
 
-    override fun areContentsTheSame(oldItem: LifestyleBean, newItem: LifestyleBean): Boolean {
+    override fun areContentsTheSame(oldItem: Lifestyle, newItem: Lifestyle): Boolean {
         return oldItem == newItem
     }
 

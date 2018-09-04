@@ -6,18 +6,18 @@ import com.msc.someweather.cardAndCell.CommenDataCell
 import com.msc.someweather.cardAndCell.viewCard.LifestyleCardView
 import com.msc.someweather.http.bean.Lifestyle
 
-class LifestyleCardViewCell : CommenDataCell<LifestyleCardView, Lifestyle.HeWeather6Bean>() {
+class LifestyleCardViewCell : CommenDataCell<LifestyleCardView, Lifestyle>() {
 
     override fun bindView(view: LifestyleCardView) {
         super.bindView(view)
 
-        view.recyclerViewBg!!.layoutManager = LinearLayoutManager(view.context,
-                LinearLayoutManager.HORIZONTAL, false)
+//        view.recyclerViewBg!!.layoutManager = LinearLayoutManager(view.context,
+//                LinearLayoutManager.HORIZONTAL, false)
+//
+//        val adapter = LifestyleAdapter()
+//        view.recyclerViewBg!!.adapter = adapter
 
-        val adapter = LifestyleAdapter()
-        view.recyclerViewBg!!.adapter = adapter
-
-        adapter.submitList(mData!!.lifestyle)
+//        adapter.submitList(mData!!.lifestyle)
     }
 
 }

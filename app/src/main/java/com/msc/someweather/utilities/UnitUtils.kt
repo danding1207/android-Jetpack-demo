@@ -43,6 +43,31 @@ object UnitUtils {
         }
     }
 
+    fun windToLevel(wind: Float): String {
+        return when {
+            wind<1 -> "0级"
+            5<wind && wind<1 -> "1级"
+            6<wind && wind<11 -> "2级"
+            12<wind && wind<19 -> "3级"
+            20<wind && wind<28 -> "4级"
+            29<wind && wind<38 -> "5级"
+            39<wind && wind<49 -> "6级"
+            50<wind && wind<61 -> "7级"
+            62<wind && wind<74 -> "8级"
+            75<wind && wind<88 -> "9级"
+            89<wind && wind<102 -> "10级"
+            103<wind && wind<116 -> "11级"
+            117<wind && wind<133 -> "12级"
+            134<wind && wind<149 -> "13级"
+            150<wind && wind<166 -> "14级"
+            167<wind && wind<183 -> "15级"
+            184<wind && wind<201 -> "16级"
+            202<wind && wind<220 -> "17级"
+            221<wind -> "17级以上"
+            else -> "0级"
+        }
+    }
+
     fun aqiToCh(aqi: Int): String {
         return when (aqi / 50) {
             0 -> "优"

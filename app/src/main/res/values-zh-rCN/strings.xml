@@ -22,7 +22,7 @@
     <string name="menu_filter_by_grow_zone">按生长区筛选</string>
     <string name="plant_detail_image_content_description">植物图片</string>
     <string name="my_garden_title">我的花园</string>
-    <string name="weather_title" />
+    <string name="weather_title" >SomeWeather</string>
     <string name="alert_title" >天气预警</string>
 
     <string name="plant_list_title">植物目录</string>

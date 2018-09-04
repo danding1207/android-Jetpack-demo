@@ -23,17 +23,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.msc.someweather.PlantListFragment
 import com.msc.someweather.databinding.ListItemLifestyleBinding
-import com.msc.someweather.http.bean.Lifestyle.HeWeather6Bean.LifestyleBean
+import com.msc.someweather.http.bean.Lifestyle
 
 /**
- * Adapter for the [RecyclerView] in [PlantListFragment].
+ * Adapter for the [RecyclerView] in [WeatherFragment].
  */
-class LifestyleAdapter : ListAdapter<LifestyleBean, LifestyleAdapter.ViewHolder>(LifestyleDiffCallback()) {
+class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(LifestyleDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val lifestyleBean = getItem(position)
         holder.apply {
-            bind(createOnClickListener(), lifestyleBean)
+            bind(createOnClickListener(position), lifestyleBean)
             itemView.tag = lifestyleBean
         }
     }
@@ -43,10 +43,11 @@ class LifestyleAdapter : ListAdapter<LifestyleBean, LifestyleAdapter.ViewHolder>
                 LayoutInflater.from(parent.context), parent, false))
     }
 
-    private fun createOnClickListener(): View.OnClickListener {
+    private fun createOnClickListener(position: Int): View.OnClickListener {
         return View.OnClickListener {
-//            val direction = PlantListFragmentDirections.ActionPlantListFragmentToPlantDetailFragment(plantId)
-//            it.findNavController().navigate(direction)
+            if (position==0) {
+
+            }
         }
     }
 
@@ -54,30 +55,10 @@ class LifestyleAdapter : ListAdapter<LifestyleBean, LifestyleAdapter.ViewHolder>
         private val binding: ListItemLifestyleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: View.OnClickListener, item: LifestyleBean) {
+        fun bind(listener: View.OnClickListener, item: Lifestyle) {
             binding.apply {
                 clickListener = listener
                 bean = item
-
-                when(item.type) {
-                    "comf"-> binding.tvType.text = "舒适度指数"
-                    "cw"-> binding.tvType.text = "洗车指数"
-                    "drsg"-> binding.tvType.text = "穿衣指数"
-                    "flu"-> binding.tvType.text = "感冒指数"
-                    "sport"-> binding.tvType.text = "运动指数"
-                    "trav"-> binding.tvType.text = "旅游指数"
-                    "uv"-> binding.tvType.text = "紫外线指数"
-                    "air"-> binding.tvType.text = "空气污染扩散条件指数"
-                    "ac"-> binding.tvType.text = "空调开启指数"
-                    "ag"-> binding.tvType.text = "过敏指数"
-                    "gl"-> binding.tvType.text = "太阳镜指数"
-                    "mu"-> binding.tvType.text = "化妆指数"
-                    "airc"-> binding.tvType.text = "晾晒指数"
-                    "ptfc"-> binding.tvType.text = "交通指数"
-                    "fsh"-> binding.tvType.text = "钓鱼指数"
-                    "spi"-> binding.tvType.text = "防晒指数"
-                }
-
                 executePendingBindings()
             }
         }

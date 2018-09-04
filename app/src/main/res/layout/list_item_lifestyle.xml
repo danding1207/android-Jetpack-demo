@@ -25,77 +25,51 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="bean"
-            type="com.msc.someweather.http.bean.Lifestyle.HeWeather6Bean.LifestyleBean"/>
+            type="com.msc.someweather.http.bean.Lifestyle"/>
     </data>
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView_bg"
-        android:layout_width="280dp"
-        android:layout_height="120dp"
-        android:background="@color/white"
-        android:layout_margin="12dp"
-        android:onClick="@{clickListener}"
+    <LinearLayout
+        android:id="@+id/ll_lifestyle"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:background="@color/black_aphal_9"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:layout_marginBottom="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:translationZ="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         >
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
 
-            <TextView
-                android:id="@+id/tv_type"
-                fontPath="fonts/fzltdb.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingPrefix"
-                tools:text="洗车指数:" />
+        <ImageView
+            android:id="@+id/iv_lifestyle"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_alert"
+            android:src="@{bean.image}" />
 
+        <TextView
+            android:id="@+id/tv_lifestyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="@{bean.desc}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_aqi"
+            app:layout_constraintStart_toEndOf="@+id/iv_aqi"
+            app:layout_constraintTop_toTopOf="@+id/iv_aqi"
+            tools:text="优" />
 
-            <TextView
-                android:id="@+id/tv_brf"
-                fontPath="fonts/fzltdb.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_type"
-                app:layout_constraintStart_toEndOf="@+id/tv_type"
-                tools:ignore="MissingPrefix"
-                tools:text="适宜"
-                android:text="@{bean.brf}"
-                />
-
-            <TextView
-                android:id="@+id/tv_txt"
-                fontPath="fonts/fzltdb.ttf"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:gravity="left"
-                android:text="@{bean.txt}"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_type"
-                app:layout_constraintTop_toBottomOf="@+id/tv_type"
-                tools:ignore="MissingPrefix"
-                tools:text="，但丝毫不会影响您出行的心情。温度适宜又有微风相伴，适宜旅游。" />
-
-
-        </android.support.constraint.ConstraintLayout>
-
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </layout>

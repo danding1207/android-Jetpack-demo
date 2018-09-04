@@ -266,7 +266,7 @@ class CaiYunWeather {
                  */
 
                 var direction: Double = 0.toDouble()
-                var speed: Double = 0.toDouble()
+                var speed: Float = 0f
             }
         }
 

@@ -21,7 +21,8 @@ import android.app.Dialog
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.location.Criteria
 import android.location.Geocoder
@@ -31,6 +32,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.*
@@ -38,6 +40,7 @@ import androidx.navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.amap.api.location.AMapLocation
 import com.google.gson.Gson
+import com.msc.someweather.adapters.LifestyleAdapter
 import com.msc.someweather.adapters.PlantAdapter
 import com.msc.someweather.cardAndCell.cardCell.*
 import com.msc.someweather.cardAndCell.viewCard.*
@@ -65,8 +68,7 @@ import kotlin.collections.HashMap
 class WeatherFragment : Fragment() {
 
     private lateinit var viewModel: WeatherViewModel
-    //    private lateinit var engine: TangramEngine
-//    private lateinit var builder: TangramBuilder.InnerBuilder
+    private lateinit var adapter: LifestyleAdapter
     private var result: ArrayList<Any> = ArrayList()
     private var location: AMapLocation? = null
 
@@ -90,6 +92,10 @@ class WeatherFragment : Fragment() {
         refreshHeader.setColorSchemeResources(R.color.black)
 
         refreshLayout.setEnableLoadMore(false)
+
+        recyclerView_lifestyle.layoutManager = LinearLayoutManager(activity!!)
+        adapter = LifestyleAdapter()
+        recyclerView_lifestyle.adapter = adapter
 
 //        refreshHeader.setShowBezierWave(true)
 
@@ -129,38 +135,94 @@ class WeatherFragment : Fragment() {
             refreshLayout.finishRefresh(true)//传入false表示刷新失败
             refreshLayout.finishLoadMore()
 
-            tv_name.text = UnitUtils.temperatureToCh(bean!!.result!!.realtime!!.skycon!!)
-
-            tv_wind.text = UnitUtils.windToCh(bean.result!!.realtime!!.wind!!.direction)
-
-            tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
-
-
+            //当天日期
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE)
             val date = Date(System.currentTimeMillis())
-
-
             Logger.e("Date: ${simpleDateFormat.format(date)}")
 
+
+            tv_name.text = UnitUtils.temperatureToCh(bean!!.result!!.realtime!!.skycon!!)
+
+            /**
+             * 风向 和 风速
+             */
+            tv_wind.text = "${UnitUtils.windToLevel(bean.result!!.realtime!!.wind!!.speed)}"
+
+//                    UnitUtils.windToCh(bean.result!!.realtime!!.wind!!.direction)
+
+            val drawableWind = bitmapRotate(
+                    ContextCompat.getDrawable(activity!!, R.drawable.wind)!!,
+                    bean.result!!.realtime!!.wind!!.direction)
+            drawableWind.setBounds(0, 0, 50, 50)
+            tv_wind.setCompoundDrawables(drawableWind,
+                    null, null, null)
+
+            /**
+             * 温度范围
+             */
             val dailytmp = bean.result!!.daily!!.temperature!!.first {
                 it.date == simpleDateFormat.format(date)
             }
-
             tv_tmp_range.text = "${dailytmp.min}℃ - ${dailytmp.max}"
+            val drawableTmp = ContextCompat.getDrawable(activity!!, R.drawable.temperature)
+            drawableTmp!!.setBounds(0, 0, 50, 50)
+            tv_tmp_range.setCompoundDrawables(drawableTmp,
+                    null, null, null)
 
-            tv_aqi.text = UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)
+            /**
+             * 湿度
+             */
+            tv_humidity.text = "34%"
+            val drawableHumidity = ContextCompat.getDrawable(activity!!, R.drawable.humidity)
+            drawableHumidity!!.setBounds(0, 0, 50, 50)
+            tv_humidity.setCompoundDrawables(drawableHumidity,
+                    null, null, null)
 
+            /**
+             * 生活指南
+             */
+            val dailyDressing = bean.result!!.daily!!.dressing!!.first {
+                it.datetime == simpleDateFormat.format(date)
+            }
+            val dailyUltraviolet = bean.result!!.daily!!.ultraviolet!!.first {
+                it.datetime == simpleDateFormat.format(date)
+            }
+            val dailyCarWashing = bean.result!!.daily!!.carWashing!!.first {
+                it.datetime == simpleDateFormat.format(date)
+            }
+            val dailyColdRisk = bean.result!!.daily!!.coldRisk!!.first {
+                it.datetime == simpleDateFormat.format(date)
+            }
+            adapter.submitList(listOf(
+                    Lifestyle("Dressing", dailyDressing.desc, R.drawable.dressing),
+                    Lifestyle("Ultraviolet", dailyUltraviolet.desc, R.drawable.ultraviolet),
+                    Lifestyle("CarWashing", dailyCarWashing.desc, R.drawable.carwashing),
+                    Lifestyle("ColdRisk", dailyColdRisk.desc, R.drawable.coldrisk)))
+
+
+
+
+
+
+
+
+            tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
+
+            /**
+             * 空气质量指数
+             */
+            tv_aqi.text = "${bean.result!!.realtime!!.aqi} ${UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)}"
             iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
                     ColorStateList.valueOf(Color.WHITE)))
-
             tv_aqi.visibility = View.VISIBLE
             iv_aqi.visibility = View.VISIBLE
+
 
 //            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
 //                    ColorStateList.valueOf(UnitUtils.aqiToColor(activity!!, bean.result!!.realtime!!.aqi))))
 
 
-            tv_ultraviolet.text = "紫外线:${bean.result!!.realtime!!.ultraviolet!!.desc}"
+//            tv_ultraviolet.text = "紫外线:${bean.result!!.realtime!!.ultraviolet!!.desc}"
 
 
             if (bean.result!!.forecast_keypoint != null && bean.result!!.forecast_keypoint!!.length > 12) {
@@ -185,10 +247,9 @@ class WeatherFragment : Fragment() {
 
                 ll_alert.setOnClickListener {
 
-                    val direction = WeatherFragmentDirections.
-                            ActionWeatherFragmentToAlertFragment(
-                                    Gson().toJson(
-                                            bean.result!!.alert!!.content))
+                    val direction = WeatherFragmentDirections.ActionWeatherFragmentToAlertFragment(
+                            Gson().toJson(
+                                    bean.result!!.alert!!.content))
 
                     view!!.findNavController().navigate(direction)
 
@@ -197,27 +258,14 @@ class WeatherFragment : Fragment() {
 
                 var levelColor = Color.WHITE
 
-//                bean.result!!.alert!!.content!!.forEach{
-//                    if (it.title!=null && it.title!!.contains("蓝色")) {
-//                        levelColor = Color.BLUE
-//                    } else if (it.title!=null && it.title!!.contains("黄色")) {
-//                        levelColor = Color.YELLOW
-//                    } else if (it.title!=null && it.title!!.contains("橙色")) {
-//                        levelColor = ContextCompat.getColor(activity!!, R.color.orange)
-//                    } else if (it.title!=null && it.title!!.contains("红色")) {
-//                        levelColor = Color.RED
-//                    }
-//                }
-
-
                 iv_alert.setImageDrawable(tintDrawable(iv_alert.drawable,
                         ColorStateList.valueOf(levelColor)))
 
 
             } else {
-                iv_alert.visibility = View.INVISIBLE
-                tv_alert.visibility = View.INVISIBLE
-                ll_alert.visibility = View.VISIBLE
+                iv_alert.visibility = View.GONE
+                tv_alert.visibility = View.GONE
+                ll_alert.visibility = View.GONE
 
             }
 
@@ -267,6 +315,7 @@ class WeatherFragment : Fragment() {
                 }
             }
 
+
 //            result.add(bean!!)
 //            val data = Gson().toJson(result)
 //            Logger.d(data)
@@ -309,6 +358,28 @@ class WeatherFragment : Fragment() {
         val wrappedDrawable = DrawableCompat.wrap(drawable)
         DrawableCompat.setTintList(wrappedDrawable, colors)
         return wrappedDrawable
+    }
+
+    /**
+     * 图片旋转
+     */
+    fun bitmapRotate(baseDrawable: Drawable, degrees: Double): Drawable {
+        val paint = Paint()
+        paint.isAntiAlias = true
+
+        val baseBitmap = (baseDrawable as BitmapDrawable).bitmap
+
+        // 创建一个和原图一样大小的图片
+        val afterBitmap = Bitmap.createBitmap(baseBitmap.width,
+                baseBitmap.height, baseBitmap.config)
+        val canvas = Canvas(afterBitmap)
+        val matrix = Matrix()
+        // 根据原图的中心位置旋转
+        matrix.setRotate(degrees.toFloat(), baseBitmap.width / 2f,
+                baseBitmap.height / 2f)
+        canvas.drawBitmap(baseBitmap, matrix, paint)
+
+        return BitmapDrawable(resources, afterBitmap)
     }
 
 }

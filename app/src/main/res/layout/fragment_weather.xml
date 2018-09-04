@@ -67,19 +67,6 @@
                 tools:ignore="MissingPrefix"
                 tools:text="桥" />
 
-            <TextView
-                android:id="@+id/tv_wind"
-                fontPath="fonts/wygdmct.otf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingPrefix"
-                tools:text="东南风" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -139,46 +126,50 @@
                 tools:ignore="MissingPrefix"
                 tools:text="受到法国军事大国发生" />
 
+
+            <TextView
+                android:id="@+id/tv_wind"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="24dp"
+                android:drawablePadding="4dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingPrefix"
+                tools:text="东南风" />
+
             <TextView
                 android:id="@+id/tv_tmp_range"
+                fontPath="fonts/wygdmct.otf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_wind"
-                fontPath="fonts/wygdmct.otf"
-                tools:ignore="MissingPrefix"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_wind"
                 app:layout_constraintStart_toEndOf="@+id/tv_wind"
+                tools:ignore="MissingPrefix"
                 tools:text="16℃ - 23℃" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tv_aqi"-->
-                <!--fontPath="fonts/wygdmct.otf"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="16sp"-->
-                <!--app:layout_constraintBaseline_toBaselineOf="@+id/tv_tmp_range"-->
-                <!--app:layout_constraintStart_toEndOf="@+id/tv_tmp_range"-->
-                <!--tools:ignore="MissingPrefix"-->
-                <!--tools:text="空气质量：优" />-->
-
             <TextView
-                android:id="@+id/tv_ultraviolet"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_humidity"
+                fontPath="fonts/wygdmct.otf"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_tmp_range"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_tmp_range"
-                tools:ignore="MissingPrefix"
-                tools:text="紫外线：弱"
-                fontPath="fonts/wygdmct.otf"
 
-                />
+                tools:ignore="MissingPrefix"
+                tools:text="34%" />
 
 
             <LinearLayout
@@ -187,29 +178,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@color/black_aphal_9"
+                android:clickable="true"
                 android:elevation="4dp"
-                android:gravity="center_vertical"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="4dp"
-                android:paddingEnd="12dp"
-                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:translationZ="4dp"
-                android:clickable="true"
-                android:visibility="invisible"
-                android:foreground="?android:attr/selectableItemBackground"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/ll_aqi">
 
 
                 <ImageView
                     android:id="@+id/iv_alert"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
+                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/alert"
-                    android:visibility="invisible"
 
                     />
 
@@ -220,42 +211,42 @@
                     android:text="预警"
                     android:textColor="@color/white"
                     android:textSize="14sp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_alert"
                     app:layout_constraintStart_toEndOf="@+id/iv_alert"
-                    app:layout_constraintTop_toTopOf="@+id/iv_alert"
-                    android:visibility="invisible"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/iv_alert" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_aqi"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@color/black_aphal_9"
+                android:clickable="true"
                 android:elevation="4dp"
-                android:gravity="center_vertical"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="4dp"
-                android:paddingEnd="12dp"
-                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:paddingTop="8dp"
                 android:translationZ="4dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_alert">
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
 
                 <ImageView
                     android:id="@+id/iv_aqi"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
+                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_alert"
-                    app:srcCompat="@drawable/aqi"
-                    android:visibility="invisible"
-                    />
+                    app:srcCompat="@drawable/aqi" />
 
                 <TextView
                     android:id="@+id/tv_aqi"
@@ -269,6 +260,17 @@
                     tools:text="优" />
 
             </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_lifestyle"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_alert" />
+
+
+
 
 
         </android.support.constraint.ConstraintLayout>
