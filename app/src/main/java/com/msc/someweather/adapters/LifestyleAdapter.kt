@@ -30,6 +30,10 @@ import com.msc.someweather.http.bean.Lifestyle
  */
 class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(LifestyleDiffCallback()) {
 
+    var simpleList: List<Lifestyle>? = null
+    var compList: List<Lifestyle>? = null
+    var isCompList: Boolean = false
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val lifestyleBean = getItem(position)
         holder.apply {
@@ -45,14 +49,14 @@ class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(Lif
 
     private fun createOnClickListener(position: Int): View.OnClickListener {
         return View.OnClickListener {
-            if (position==0) {
-
+            if (position == 0) {
+                toggle()
             }
         }
     }
 
     class ViewHolder(
-        private val binding: ListItemLifestyleBinding
+            private val binding: ListItemLifestyleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: Lifestyle) {
@@ -63,4 +67,16 @@ class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(Lif
             }
         }
     }
+
+
+    private fun toggle() {
+        if (isCompList) {
+            submitList(simpleList)
+        } else {
+            submitList(compList)
+        }
+        isCompList = !isCompList
+    }
+
+
 }

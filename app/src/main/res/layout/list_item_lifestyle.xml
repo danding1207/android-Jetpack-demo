@@ -23,6 +23,7 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
+
         <variable
             name="bean"
             type="com.msc.someweather.http.bean.Lifestyle"/>
@@ -38,6 +39,7 @@
         android:layout_marginBottom="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
+        android:onClick="@{clickListener}"
         android:orientation="horizontal"
         android:paddingBottom="4dp"
         android:paddingEnd="8dp"

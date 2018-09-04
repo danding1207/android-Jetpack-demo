@@ -193,18 +193,20 @@ class WeatherFragment : Fragment() {
             val dailyColdRisk = bean.result!!.daily!!.coldRisk!!.first {
                 it.datetime == simpleDateFormat.format(date)
             }
-            adapter.submitList(listOf(
+
+            val simpleList = listOf(
+                    Lifestyle("Dressing", dailyDressing.desc, R.drawable.dressing))
+            val compList = listOf(
                     Lifestyle("Dressing", dailyDressing.desc, R.drawable.dressing),
                     Lifestyle("Ultraviolet", dailyUltraviolet.desc, R.drawable.ultraviolet),
                     Lifestyle("CarWashing", dailyCarWashing.desc, R.drawable.carwashing),
-                    Lifestyle("ColdRisk", dailyColdRisk.desc, R.drawable.coldrisk)))
+                    Lifestyle("ColdRisk", dailyColdRisk.desc, R.drawable.coldrisk))
 
+            adapter.simpleList = simpleList
+            adapter.compList = compList
 
-
-
-
-
-
+            adapter.submitList(simpleList)
+            adapter.isCompList = false
 
             tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
 
