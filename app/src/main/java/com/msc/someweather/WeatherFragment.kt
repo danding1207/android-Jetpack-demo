@@ -72,7 +72,6 @@ class WeatherFragment : Fragment() {
     private var result: ArrayList<Any> = ArrayList()
     private var location: AMapLocation? = null
 
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -96,6 +95,7 @@ class WeatherFragment : Fragment() {
         recyclerView_lifestyle.layoutManager = LinearLayoutManager(activity!!)
         adapter = LifestyleAdapter()
         recyclerView_lifestyle.adapter = adapter
+        adapter.recyclerView = recyclerView_lifestyle
 
 //        refreshHeader.setShowBezierWave(true)
 
@@ -135,21 +135,22 @@ class WeatherFragment : Fragment() {
             refreshLayout.finishRefresh(true)//传入false表示刷新失败
             refreshLayout.finishLoadMore()
 
-            //当天日期
+            /**
+             * 当天日期
+             */
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CHINESE)
             val date = Date(System.currentTimeMillis())
             Logger.e("Date: ${simpleDateFormat.format(date)}")
 
-
+            /**
+             * 天气
+             */
             tv_name.text = UnitUtils.temperatureToCh(bean!!.result!!.realtime!!.skycon!!)
 
             /**
              * 风向 和 风速
              */
             tv_wind.text = "${UnitUtils.windToLevel(bean.result!!.realtime!!.wind!!.speed)}"
-
-//                    UnitUtils.windToCh(bean.result!!.realtime!!.wind!!.direction)
-
             val drawableWind = bitmapRotate(
                     ContextCompat.getDrawable(activity!!, R.drawable.wind)!!,
                     bean.result!!.realtime!!.wind!!.direction)
@@ -163,7 +164,7 @@ class WeatherFragment : Fragment() {
             val dailytmp = bean.result!!.daily!!.temperature!!.first {
                 it.date == simpleDateFormat.format(date)
             }
-            tv_tmp_range.text = "${dailytmp.min}℃ - ${dailytmp.max}"
+            tv_tmp_range.text = "${dailytmp.min}℃ - ${dailytmp.max}℃"
             val drawableTmp = ContextCompat.getDrawable(activity!!, R.drawable.temperature)
             drawableTmp!!.setBounds(0, 0, 50, 50)
             tv_tmp_range.setCompoundDrawables(drawableTmp,
@@ -179,11 +180,21 @@ class WeatherFragment : Fragment() {
                     null, null, null)
 
             /**
-             * 生活指南
+             * 穿衣指数
              */
             val dailyDressing = bean.result!!.daily!!.dressing!!.first {
                 it.datetime == simpleDateFormat.format(date)
             }
+            tv_dressing.text = "${dailyDressing.desc}"
+            iv_dressing.setImageDrawable(tintDrawable(iv_dressing.drawable,
+                    ColorStateList.valueOf(Color.WHITE)))
+            ll_dressing.setOnClickListener {
+                adapter.toggle()
+            }
+
+            /**
+             * 生活指南
+             */
             val dailyUltraviolet = bean.result!!.daily!!.ultraviolet!!.first {
                 it.datetime == simpleDateFormat.format(date)
             }
@@ -194,50 +205,17 @@ class WeatherFragment : Fragment() {
                 it.datetime == simpleDateFormat.format(date)
             }
 
-            val simpleList = listOf(
-                    Lifestyle("Dressing", dailyDressing.desc, R.drawable.dressing))
+            val simpleList = listOf<Lifestyle>()
             val compList = listOf(
-                    Lifestyle("Dressing", dailyDressing.desc, R.drawable.dressing),
                     Lifestyle("Ultraviolet", dailyUltraviolet.desc, R.drawable.ultraviolet),
                     Lifestyle("CarWashing", dailyCarWashing.desc, R.drawable.carwashing),
                     Lifestyle("ColdRisk", dailyColdRisk.desc, R.drawable.coldrisk))
 
             adapter.simpleList = simpleList
             adapter.compList = compList
-
             adapter.submitList(simpleList)
             adapter.isCompList = false
 
-            tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
-
-            /**
-             * 空气质量指数
-             */
-            tv_aqi.text = "${bean.result!!.realtime!!.aqi} ${UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)}"
-            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
-                    ColorStateList.valueOf(Color.WHITE)))
-            tv_aqi.visibility = View.VISIBLE
-            iv_aqi.visibility = View.VISIBLE
-
-
-//            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
-//                    ColorStateList.valueOf(UnitUtils.aqiToColor(activity!!, bean.result!!.realtime!!.aqi))))
-
-
-//            tv_ultraviolet.text = "紫外线:${bean.result!!.realtime!!.ultraviolet!!.desc}"
-
-
-            if (bean.result!!.forecast_keypoint != null && bean.result!!.forecast_keypoint!!.length > 12) {
-                val head = bean.result!!.forecast_keypoint!!.substring(0, bean.result!!.forecast_keypoint!!.length / 2)
-                val foot = bean.result!!.forecast_keypoint!!.substring(bean.result!!.forecast_keypoint!!.length / 2, bean.result!!.forecast_keypoint!!.length)
-                tv_description.text = head
-                tv_description_sub.text = foot
-            } else {
-                tv_description.text = bean.result!!.forecast_keypoint
-                tv_description_sub.text = ""
-            }
-
-            val num = (Math.random() * 9).toInt()
 
             if (bean.result!!.alert != null
                     && "ok" == bean.result!!.alert!!.status
@@ -270,6 +248,45 @@ class WeatherFragment : Fragment() {
                 ll_alert.visibility = View.GONE
 
             }
+
+
+            tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
+
+            /**
+             * 空气质量指数
+             */
+            tv_aqi.text = "${bean.result!!.realtime!!.aqi} ${UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)}"
+            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
+                    ColorStateList.valueOf(Color.WHITE)))
+            ll_aqi.setOnClickListener {
+
+                val direction = WeatherFragmentDirections.ActionWeatherFragmentToAqiFragment(
+                        Gson().toJson(
+                                bean.result))
+
+                view!!.findNavController().navigate(direction)
+            }
+
+//            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
+//                    ColorStateList.valueOf(UnitUtils.aqiToColor(activity!!, bean.result!!.realtime!!.aqi))))
+
+
+//            tv_ultraviolet.text = "紫外线:${bean.result!!.realtime!!.ultraviolet!!.desc}"
+
+
+            if (bean.result!!.forecast_keypoint != null && bean.result!!.forecast_keypoint!!.length > 12) {
+                val head = bean.result!!.forecast_keypoint!!.substring(0, bean.result!!.forecast_keypoint!!.length / 2)
+                val foot = bean.result!!.forecast_keypoint!!.substring(bean.result!!.forecast_keypoint!!.length / 2, bean.result!!.forecast_keypoint!!.length)
+                tv_description.text = head
+                tv_description_sub.text = foot
+            } else {
+                tv_description.text = bean.result!!.forecast_keypoint
+                tv_description_sub.text = ""
+            }
+
+            val num = (Math.random() * 9).toInt()
+
+
 
             when (num) {
                 0 -> {

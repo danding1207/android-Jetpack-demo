@@ -172,51 +172,6 @@
                 tools:text="34%" />
 
 
-            <LinearLayout
-                android:id="@+id/ll_alert"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/black_aphal_9"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="4dp"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:translationZ="4dp"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_aqi">
-
-
-                <ImageView
-                    android:id="@+id/iv_alert"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/alert"
-
-                    />
-
-                <TextView
-                    android:id="@+id/tv_alert"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="预警"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_alert"
-                    app:layout_constraintStart_toEndOf="@+id/iv_alert"
-                    app:layout_constraintTop_toTopOf="@+id/iv_alert" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_aqi"
@@ -243,7 +198,6 @@
                     android:id="@+id/iv_aqi"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_alert"
                     app:srcCompat="@drawable/aqi" />
@@ -261,16 +215,105 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_alert"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_aphal_9"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:translationZ="4dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_aqi">
+
+
+                <ImageView
+                    android:id="@+id/iv_alert"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/alert"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_alert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预警"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_alert"
+                    app:layout_constraintStart_toEndOf="@+id/iv_alert"
+                    app:layout_constraintTop_toTopOf="@+id/iv_alert" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_dressing"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/black_aphal_9"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:translationZ="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_alert">
+
+
+                <ImageView
+                    android:id="@+id/iv_dressing"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/dressing"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_dressing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预警"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_alert"
+                    app:layout_constraintStart_toEndOf="@+id/iv_alert"
+                    app:layout_constraintTop_toTopOf="@+id/iv_alert" />
+
+            </LinearLayout>
+
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView_lifestyle"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_alert" />
-
-
-
+                app:layout_constraintTop_toBottomOf="@+id/ll_dressing"
+                android:layoutAnimation="@anim/layout_animation_slide_left"
+                />
 
 
         </android.support.constraint.ConstraintLayout>

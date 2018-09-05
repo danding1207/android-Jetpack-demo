@@ -21,9 +21,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.msc.someweather.PlantListFragment
 import com.msc.someweather.databinding.ListItemLifestyleBinding
 import com.msc.someweather.http.bean.Lifestyle
+
 
 /**
  * Adapter for the [RecyclerView] in [WeatherFragment].
@@ -33,6 +33,7 @@ class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(Lif
     var simpleList: List<Lifestyle>? = null
     var compList: List<Lifestyle>? = null
     var isCompList: Boolean = false
+    var recyclerView: RecyclerView? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val lifestyleBean = getItem(position)
@@ -49,9 +50,6 @@ class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(Lif
 
     private fun createOnClickListener(position: Int): View.OnClickListener {
         return View.OnClickListener {
-            if (position == 0) {
-                toggle()
-            }
         }
     }
 
@@ -69,7 +67,7 @@ class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(Lif
     }
 
 
-    private fun toggle() {
+    fun toggle() {
         if (isCompList) {
             submitList(simpleList)
         } else {
@@ -78,5 +76,9 @@ class LifestyleAdapter : ListAdapter<Lifestyle, LifestyleAdapter.ViewHolder>(Lif
         isCompList = !isCompList
     }
 
+    override fun submitList(list: List<Lifestyle>?) {
+        super.submitList(list)
+        recyclerView!!.scheduleLayoutAnimation()
+    }
 
 }

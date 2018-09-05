@@ -58,7 +58,9 @@ object InjectorUtils {
         return AlertViewModelFactory(fragment)
     }
 
-
+    fun provideAqiViewModelFactory(fragment: Fragment): AqiViewModelFactory {
+        return AqiViewModelFactory(fragment)
+    }
 
     fun providePlantDetailViewModelFactory(
         context: Context,

@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/garden_fragment"
         android:name="com.msc.someweather.GardenFragment"
-        android:label="@string/my_garden_title"
+
         tools:layout="@layout/fragment_garden">
         <action
             android:id="@+id/action_garden_fragment_to_weather_fragment"
@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/plant_list_fragment"
         android:name="com.msc.someweather.PlantListFragment"
-        android:label="@string/plant_list_title"
+
         tools:layout="@layout/fragment_plant_list">
         <action
             android:id="@+id/action_plant_list_fragment_to_plant_detail_fragment"
@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/plant_detail_fragment"
         android:name="com.msc.someweather.PlantDetailFragment"
-        android:label="@string/plant_details_title"
+
         tools:layout="@layout/fragment_plant_detail">
         <argument
             android:name="plantId"
@@ -71,6 +71,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
+        <action
+            android:id="@+id/action_weather_fragment_to_aqi_fragment"
+            app:destination="@id/aqi_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -85,6 +93,16 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/aqi_fragment"
+        android:name="com.msc.someweather.AqiFragment"
+        android:label="@string/aqi_title"
+        tools:layout="@layout/fragment_aqi">
 
+        <argument
+            android:name="weather"
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>
