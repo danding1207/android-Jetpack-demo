@@ -25,6 +25,10 @@
 
     <color name="gray">#A0A0A0</color>
 
+    <color name="gray_cuttingline">#F0F0F0</color>
+
+
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
@@ -38,12 +42,12 @@
     <color name="orange">#FF6600</color>
 
 
-    <color name="aqi_1">#00FF00</color>
-    <color name="aqi_2">#FFFF00</color>
-    <color name="aqi_3">#FF6600</color>
-    <color name="aqi_4">#FF0000</color>
-    <color name="aqi_5">#CC6699</color>
-    <color name="aqi_6">#660066</color>
+    <color name="aqi_1">#56ECED</color>
+    <color name="aqi_2">#45ECA8</color>
+    <color name="aqi_3">#76DE00</color>
+    <color name="aqi_4">#F7DA66</color>
+    <color name="aqi_5">#F99A66</color>
+    <color name="aqi_6">#FF6600</color>
 
 
 

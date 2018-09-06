@@ -27,7 +27,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import com.github.mikephil.charting.components.Legend
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.msc.someweather.adapters.LifestyleAdapter
@@ -44,8 +43,6 @@ import kotlin.collections.ArrayList
 
 import com.msc.someweather.http.bean.CaiYunWeather.ResultBean.HourlyBean.AqiBean
 import kotlinx.android.synthetic.main.fragment_aqi.*
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.*
 import com.msc.someweather.http.bean.CaiYunWeather.ResultBean
 
 class AqiFragment : Fragment() {
@@ -82,6 +79,9 @@ class AqiFragment : Fragment() {
         tv_no2_detail.text = result.realtime!!.no2.toString()
         tv_co_detail.text = result.realtime!!.co.toString()
         tv_o3_detail.text = result.realtime!!.o3.toString()
+
+        aqiView.result = result
+        aqiView.invalidateView()
 
     }
 

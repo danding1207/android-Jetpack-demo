@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Google LLC
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,27 +17,137 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:background="@color/white"
-    >
+    android:layout_height="@dimen/hourly_aqi_view_base_height_6"
+    android:background="@color/white">
 
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
-        android:text="风力"
+        android:id="@+id/tv_y_wind"
+        android:layout_width="@dimen/hourly_aqi_view_y_width"
+        android:layout_height="@dimen/hourly_aqi_view_base_height"
+        android:layout_marginBottom="@dimen/hourly_aqi_view_base_height"
         android:gravity="center"
+        android:text="风力"
         android:textColor="@color/gray"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_y_100"
+        android:layout_width="@dimen/hourly_aqi_view_y_width"
+        android:layout_height="@dimen/hourly_aqi_view_base_height"
+        android:layout_marginBottom="@dimen/hourly_aqi_view_base_height_half"
+        android:gravity="center"
+        android:text="100"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_y_wind"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_y_200"
+        android:layout_width="@dimen/hourly_aqi_view_y_width"
+        android:layout_height="@dimen/hourly_aqi_view_base_height"
+        android:gravity="center"
+        android:text="200"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_y_100"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_y_300"
+        android:layout_width="@dimen/hourly_aqi_view_y_width"
+        android:layout_height="@dimen/hourly_aqi_view_base_height"
+        android:layout_marginTop="@dimen/hourly_aqi_view_base_height_half"
+        android:gravity="center"
+        android:text="300"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_y_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_cutting_300"
+        android:layout_width="0dp"
+        android:layout_height="2px"
+        android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
+        android:background="@color/gray_cuttingline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_y_300"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_cutting_200"
+        android:layout_width="0dp"
+        android:layout_height="2px"
+        android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
+        android:background="@color/gray_cuttingline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_y_200"
+        app:layout_constraintTop_toBottomOf="@+id/view_cutting_300" />
+
+    <View
+        android:id="@+id/view_cutting_100"
+        android:layout_width="0dp"
+        android:layout_height="2px"
+        android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
+        android:background="@color/gray_cuttingline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_y_100"
+        app:layout_constraintTop_toBottomOf="@+id/view_cutting_200" />
+
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view_cutting_100"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_api_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hourly_aqi_view_base_height_4"
+                android:gravity="bottom"
+                android:orientation="horizontal">
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_api_wind"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hourly_aqi_view_base_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_api_time_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hourly_aqi_view_base_height"
+                android:orientation="horizontal"
+
+                >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
 </android.support.constraint.ConstraintLayout>
 

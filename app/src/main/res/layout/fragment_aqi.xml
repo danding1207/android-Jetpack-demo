@@ -213,6 +213,25 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_o3_detail" />
 
 
+        <View
+            android:id="@+id/view_cutting_bw_tip_and_chart"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray_cuttingline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pm10_tip"
+            />
+
+        <com.msc.someweather.view.HourlyAqiView
+            android:id="@+id/aqiView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_cutting_bw_tip_and_chart" />
+
+
     </android.support.constraint.ConstraintLayout>
 
 

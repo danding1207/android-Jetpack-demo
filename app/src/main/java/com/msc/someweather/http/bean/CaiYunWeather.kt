@@ -151,6 +151,7 @@ class CaiYunWeather {
                 var direction: Double = 0.toDouble()
                 var speed: Double = 0.toDouble()
                 var datetime: String? = null
+                var length: Int = 0
             }
 
             class TemperatureBean {
@@ -266,7 +267,7 @@ class CaiYunWeather {
                  */
 
                 var direction: Double = 0.toDouble()
-                var speed: Float = 0f
+                var speed: Double = 0.toDouble()
             }
         }
 

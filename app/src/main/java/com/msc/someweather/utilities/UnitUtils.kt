@@ -7,6 +7,58 @@ import com.msc.someweather.R
 
 object UnitUtils {
 
+    /**
+     * dp转换为px
+     *
+     * @param context
+     * @param dpValue
+     * dp值
+     * @return 转换后px值
+     */
+    fun dipTopx(context: Context, dpValue: Float): Int {
+        val scale = context.resources.displayMetrics.density
+        return (dpValue * scale + 0.5f).toInt()
+    }
+
+    /**
+     * px转换为dp
+     *
+     * @param context
+     * @param pxValue
+     * px值
+     * @return 转换后dp值
+     */
+    fun pxTodip(context: Context, pxValue: Float): Int {
+        val scale = context.resources.displayMetrics.density
+        return (pxValue / scale + 0.5f).toInt()
+    }
+
+    /**
+     * 将px值转换为sp值，保证文字大小不变  
+     *
+     * @param pxValue
+     * @param fontScale
+     * （DisplayMetrics类中属性scaledDensity）
+     * @return          
+     */
+    fun px2sp(context: Context, pxValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (pxValue / fontScale + 0.5f).toInt()
+    }
+
+    /**
+     * 将sp值转换为px值，保证文字大小不变         
+     *
+     * @param spValue
+     *          
+     * @param fontScale
+     * （DisplayMetrics类中属性scaledDensity）
+     * @return          
+     */
+    fun sp2px(context: Context, spValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (spValue * fontScale + 0.5f).toInt()
+    }
 
     fun temperatureToCh(temperature: String): String {
         return when (temperature) {
@@ -43,28 +95,42 @@ object UnitUtils {
         }
     }
 
-    fun windToLevel(wind: Float): String {
+    fun windToAngle(wind: Double): Int {
         return when {
-            wind<1 -> "0级"
-            5<wind && wind<1 -> "1级"
-            6<wind && wind<11 -> "2级"
-            12<wind && wind<19 -> "3级"
-            20<wind && wind<28 -> "4级"
-            29<wind && wind<38 -> "5级"
-            39<wind && wind<49 -> "6级"
-            50<wind && wind<61 -> "7级"
-            62<wind && wind<74 -> "8级"
-            75<wind && wind<88 -> "9级"
-            89<wind && wind<102 -> "10级"
-            103<wind && wind<116 -> "11级"
-            117<wind && wind<133 -> "12级"
-            134<wind && wind<149 -> "13级"
-            150<wind && wind<166 -> "14级"
-            167<wind && wind<183 -> "15级"
-            184<wind && wind<201 -> "16级"
-            202<wind && wind<220 -> "17级"
-            221<wind -> "17级以上"
-            else -> "0级"
+            wind<22.5 || wind >=337.5 -> 180
+            wind >=22.5 && wind<67.5 -> 225
+            wind >=67.5 && wind<112.5 -> 270
+            wind >=112.5 && wind<157.5 -> 315
+            wind >=157.5 && wind<202.5 -> 0
+            wind >=202.5 && wind<247.5 -> 45
+            wind >=247.5 && wind<292.5 -> 90
+            wind >=292.5 && wind<337.5 -> 135
+            else -> 0
+        }
+    }
+
+    fun windToLevel(wind: Double): Int {
+        return when {
+            wind<1 -> 0
+            5<wind && wind<1 -> 1
+            6<wind && wind<11 -> 2
+            12<wind && wind<19 -> 3
+            20<wind && wind<28 -> 4
+            29<wind && wind<38 -> 5
+            39<wind && wind<49 -> 6
+            50<wind && wind<61 -> 7
+            62<wind && wind<74 -> 8
+            75<wind && wind<88 -> 9
+            89<wind && wind<102 -> 10
+            103<wind && wind<116 -> 11
+            117<wind && wind<133 -> 12
+            134<wind && wind<149 -> 13
+            150<wind && wind<166 -> 14
+            167<wind && wind<183 -> 15
+            184<wind && wind<201 -> 16
+            202<wind && wind<220 -> 17
+            221<wind -> 17
+            else -> 0
         }
     }
 
@@ -76,7 +142,7 @@ object UnitUtils {
             3 -> "中度污染"
             4, 5 -> "重度污染"
             6,7,8,9,10 -> "严重污染"
-            else -> "北风"
+            else -> "严重污染"
         }
     }
 

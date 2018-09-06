@@ -27,4 +27,15 @@
     <dimen name="navigation_drawer_header_height">192dp</dimen>
     <dimen name="navigation_drawer_header_padding">16dp</dimen>
     <dimen name="navigation_drawer_image_width">100dp</dimen>
+
+
+    <dimen name="hourly_aqi_view_base_height">40dp</dimen>
+    <dimen name="hourly_aqi_view_y_width">40dp</dimen>
+    <dimen name="hourly_aqi_view_base_height_4">160dp</dimen>
+    <dimen name="hourly_aqi_view_base_height_6">240dp</dimen>
+    <dimen name="hourly_aqi_view_base_height_half">20dp</dimen>
+    <dimen name="hourly_aqi_view_bar_width">7dp</dimen>
+    <dimen name="hourly_aqi_view_bar_margin_width">1dp</dimen>
+
+
 </resources>

@@ -46,6 +46,7 @@ import com.msc.someweather.cardAndCell.cardCell.*
 import com.msc.someweather.cardAndCell.viewCard.*
 import com.msc.someweather.http.DataRepository
 import com.msc.someweather.http.bean.*
+import com.msc.someweather.utilities.DrawableUtils
 import com.msc.someweather.utilities.HttpUtils
 import com.msc.someweather.utilities.InjectorUtils
 import com.msc.someweather.utilities.UnitUtils
@@ -150,10 +151,13 @@ class WeatherFragment : Fragment() {
             /**
              * 风向 和 风速
              */
-            tv_wind.text = "${UnitUtils.windToLevel(bean.result!!.realtime!!.wind!!.speed)}"
-            val drawableWind = bitmapRotate(
-                    ContextCompat.getDrawable(activity!!, R.drawable.wind)!!,
-                    bean.result!!.realtime!!.wind!!.direction)
+            tv_wind.text = "${UnitUtils.windToLevel(bean.result!!.realtime!!.wind!!.speed)}级"
+            val drawableWind = DrawableUtils.tintDrawable(
+                    DrawableUtils.bitmapRotate(resources,
+                            ContextCompat.getDrawable(activity!!, R.drawable.wind)!!,
+                            UnitUtils.windToAngle(bean.result!!.realtime!!.wind!!.direction)),
+                    ColorStateList.valueOf(Color.BLACK))
+
             drawableWind.setBounds(0, 0, 50, 50)
             tv_wind.setCompoundDrawables(drawableWind,
                     null, null, null)
@@ -165,8 +169,9 @@ class WeatherFragment : Fragment() {
                 it.date == simpleDateFormat.format(date)
             }
             tv_tmp_range.text = "${dailytmp.min}℃ - ${dailytmp.max}℃"
-            val drawableTmp = ContextCompat.getDrawable(activity!!, R.drawable.temperature)
-            drawableTmp!!.setBounds(0, 0, 50, 50)
+            val drawableTmp = DrawableUtils.tintDrawable(ContextCompat.getDrawable(activity!!, R.drawable.temperature)!!,
+                            ColorStateList.valueOf(Color.BLACK))
+            drawableTmp.setBounds(0, 0, 50, 50)
             tv_tmp_range.setCompoundDrawables(drawableTmp,
                     null, null, null)
 
@@ -174,8 +179,9 @@ class WeatherFragment : Fragment() {
              * 湿度
              */
             tv_humidity.text = "34%"
-            val drawableHumidity = ContextCompat.getDrawable(activity!!, R.drawable.humidity)
-            drawableHumidity!!.setBounds(0, 0, 50, 50)
+            val drawableHumidity = DrawableUtils.tintDrawable(ContextCompat.getDrawable(activity!!, R.drawable.humidity)!!,
+                    ColorStateList.valueOf(Color.BLACK))
+            drawableHumidity.setBounds(0, 0, 50, 50)
             tv_humidity.setCompoundDrawables(drawableHumidity,
                     null, null, null)
 
@@ -186,7 +192,7 @@ class WeatherFragment : Fragment() {
                 it.datetime == simpleDateFormat.format(date)
             }
             tv_dressing.text = "${dailyDressing.desc}"
-            iv_dressing.setImageDrawable(tintDrawable(iv_dressing.drawable,
+            iv_dressing.setImageDrawable(DrawableUtils.tintDrawable(iv_dressing.drawable,
                     ColorStateList.valueOf(Color.WHITE)))
             ll_dressing.setOnClickListener {
                 adapter.toggle()
@@ -238,7 +244,7 @@ class WeatherFragment : Fragment() {
 
                 var levelColor = Color.WHITE
 
-                iv_alert.setImageDrawable(tintDrawable(iv_alert.drawable,
+                iv_alert.setImageDrawable(DrawableUtils.tintDrawable(iv_alert.drawable,
                         ColorStateList.valueOf(levelColor)))
 
 
@@ -256,7 +262,7 @@ class WeatherFragment : Fragment() {
              * 空气质量指数
              */
             tv_aqi.text = "${bean.result!!.realtime!!.aqi} ${UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)}"
-            iv_aqi.setImageDrawable(tintDrawable(iv_aqi.drawable,
+            iv_aqi.setImageDrawable(DrawableUtils.tintDrawable(iv_aqi.drawable,
                     ColorStateList.valueOf(Color.WHITE)))
             ll_aqi.setOnClickListener {
 
@@ -371,34 +377,6 @@ class WeatherFragment : Fragment() {
         menu!!.findItem(R.id.action_location).title =
                 if (this.location == null) "定位中..."
                 else "${this.location!!.district}-${this.location!!.aoiName}"
-    }
-
-    fun tintDrawable(drawable: Drawable, colors: ColorStateList): Drawable {
-        val wrappedDrawable = DrawableCompat.wrap(drawable)
-        DrawableCompat.setTintList(wrappedDrawable, colors)
-        return wrappedDrawable
-    }
-
-    /**
-     * 图片旋转
-     */
-    fun bitmapRotate(baseDrawable: Drawable, degrees: Double): Drawable {
-        val paint = Paint()
-        paint.isAntiAlias = true
-
-        val baseBitmap = (baseDrawable as BitmapDrawable).bitmap
-
-        // 创建一个和原图一样大小的图片
-        val afterBitmap = Bitmap.createBitmap(baseBitmap.width,
-                baseBitmap.height, baseBitmap.config)
-        val canvas = Canvas(afterBitmap)
-        val matrix = Matrix()
-        // 根据原图的中心位置旋转
-        matrix.setRotate(degrees.toFloat(), baseBitmap.width / 2f,
-                baseBitmap.height / 2f)
-        canvas.drawBitmap(baseBitmap, matrix, paint)
-
-        return BitmapDrawable(resources, afterBitmap)
     }
 
 }
