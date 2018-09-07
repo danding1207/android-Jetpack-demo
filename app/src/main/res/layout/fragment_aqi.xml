@@ -45,7 +45,7 @@
             android:id="@+id/view_cutting_aqi"
             android:layout_width="2px"
             android:layout_height="50dp"
-            android:background="@color/gray"
+            android:background="@color/gray_cuttingline"
             app:layout_constraintBottom_toBottomOf="@+id/tv_aqi_tip"
             app:layout_constraintEnd_toStartOf="@+id/tv_pm25_detail"
             app:layout_constraintHorizontal_bias="0.5"
@@ -216,7 +216,7 @@
         <View
             android:id="@+id/view_cutting_bw_tip_and_chart"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="10dp"
             android:layout_marginTop="16dp"
             android:background="@color/gray_cuttingline"
             app:layout_constraintTop_toBottomOf="@+id/tv_pm10_tip"

@@ -15,49 +15,46 @@
   -->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/hourly_aqi_view_base_height_6"
+    android:layout_height="match_parent"
     android:background="@color/white">
-
 
     <TextView
         android:id="@+id/tv_y_wind"
         android:layout_width="@dimen/hourly_aqi_view_y_width"
         android:layout_height="@dimen/hourly_aqi_view_base_height"
-        android:layout_marginBottom="@dimen/hourly_aqi_view_base_height"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="风力"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_y_1" />
 
     <TextView
-        android:id="@+id/tv_y_100"
+        android:id="@+id/tv_y_1"
         android:layout_width="@dimen/hourly_aqi_view_y_width"
         android:layout_height="@dimen/hourly_aqi_view_base_height"
-        android:layout_marginBottom="@dimen/hourly_aqi_view_base_height_half"
         android:gravity="center"
         android:text="100"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_y_wind"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_y_2" />
 
     <TextView
-        android:id="@+id/tv_y_200"
+        android:id="@+id/tv_y_2"
         android:layout_width="@dimen/hourly_aqi_view_y_width"
         android:layout_height="@dimen/hourly_aqi_view_base_height"
         android:gravity="center"
         android:text="200"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_y_100"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_y_3" />
 
     <TextView
-        android:id="@+id/tv_y_300"
+        android:id="@+id/tv_y_3"
         android:layout_width="@dimen/hourly_aqi_view_y_width"
         android:layout_height="@dimen/hourly_aqi_view_base_height"
         android:layout_marginTop="@dimen/hourly_aqi_view_base_height_half"
@@ -65,7 +62,7 @@
         android:text="300"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_y_200"
+        app:layout_constraintBottom_toTopOf="@+id/tv_y_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,7 +73,7 @@
         android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
         android:background="@color/gray_cuttingline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_y_300"
+        app:layout_constraintStart_toEndOf="@+id/tv_y_3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -86,7 +83,7 @@
         android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
         android:background="@color/gray_cuttingline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_y_200"
+        app:layout_constraintStart_toEndOf="@+id/tv_y_2"
         app:layout_constraintTop_toBottomOf="@+id/view_cutting_300" />
 
     <View
@@ -96,14 +93,14 @@
         android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
         android:background="@color/gray_cuttingline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_y_100"
+        app:layout_constraintStart_toEndOf="@+id/tv_y_1"
         app:layout_constraintTop_toBottomOf="@+id/view_cutting_200" />
 
-    <HorizontalScrollView
+    <com.msc.someweather.view.ObservableHorizontalScrollView
+        android:id="@+id/horizontalScrollView_hourly_aqi"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/hourly_aqi_view_base_height_6"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/view_cutting_100"
         app:layout_constraintTop_toTopOf="parent">
@@ -147,7 +144,48 @@
 
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </com.msc.someweather.view.ObservableHorizontalScrollView>
+
+    <View
+        android:id="@+id/view_cutting_bw_tip_and_chart"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
+        android:background="@color/gray_cuttingline"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView_hourly_aqi"
+        />
+
+    <com.msc.someweather.view.ObservableHorizontalScrollView
+        android:id="@+id/horizontalScrollView_daily_aqi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_cutting_bw_tip_and_chart">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_daily_aqi"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hourly_aqi_view_base_height_3"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.msc.someweather.view.ObservableHorizontalScrollView>
+
+
 
 </android.support.constraint.ConstraintLayout>
 

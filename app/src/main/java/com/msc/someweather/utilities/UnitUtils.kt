@@ -4,6 +4,15 @@ import android.content.Context
 import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import com.msc.someweather.R
+import android.util.DisplayMetrics
+import android.support.v4.content.ContextCompat.getSystemService
+import android.view.WindowManager
+import com.orhanobut.logger.Logger
+import android.text.format.DateFormat.getDateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 object UnitUtils {
 
@@ -97,65 +106,185 @@ object UnitUtils {
 
     fun windToAngle(wind: Double): Int {
         return when {
-            wind<22.5 || wind >=337.5 -> 180
-            wind >=22.5 && wind<67.5 -> 225
-            wind >=67.5 && wind<112.5 -> 270
-            wind >=112.5 && wind<157.5 -> 315
-            wind >=157.5 && wind<202.5 -> 0
-            wind >=202.5 && wind<247.5 -> 45
-            wind >=247.5 && wind<292.5 -> 90
-            wind >=292.5 && wind<337.5 -> 135
+            wind < 22.5 || wind >= 337.5 -> 180
+            wind >= 22.5 && wind < 67.5 -> 225
+            wind >= 67.5 && wind < 112.5 -> 270
+            wind >= 112.5 && wind < 157.5 -> 315
+            wind >= 157.5 && wind < 202.5 -> 0
+            wind >= 202.5 && wind < 247.5 -> 45
+            wind >= 247.5 && wind < 292.5 -> 90
+            wind >= 292.5 && wind < 337.5 -> 135
             else -> 0
         }
     }
 
     fun windToLevel(wind: Double): Int {
         return when {
-            wind<1 -> 0
-            5<wind && wind<1 -> 1
-            6<wind && wind<11 -> 2
-            12<wind && wind<19 -> 3
-            20<wind && wind<28 -> 4
-            29<wind && wind<38 -> 5
-            39<wind && wind<49 -> 6
-            50<wind && wind<61 -> 7
-            62<wind && wind<74 -> 8
-            75<wind && wind<88 -> 9
-            89<wind && wind<102 -> 10
-            103<wind && wind<116 -> 11
-            117<wind && wind<133 -> 12
-            134<wind && wind<149 -> 13
-            150<wind && wind<166 -> 14
-            167<wind && wind<183 -> 15
-            184<wind && wind<201 -> 16
-            202<wind && wind<220 -> 17
-            221<wind -> 17
+            wind < 1 -> 0
+            5 < wind && wind < 1 -> 1
+            6 < wind && wind < 11 -> 2
+            12 < wind && wind < 19 -> 3
+            20 < wind && wind < 28 -> 4
+            29 < wind && wind < 38 -> 5
+            39 < wind && wind < 49 -> 6
+            50 < wind && wind < 61 -> 7
+            62 < wind && wind < 74 -> 8
+            75 < wind && wind < 88 -> 9
+            89 < wind && wind < 102 -> 10
+            103 < wind && wind < 116 -> 11
+            117 < wind && wind < 133 -> 12
+            134 < wind && wind < 149 -> 13
+            150 < wind && wind < 166 -> 14
+            167 < wind && wind < 183 -> 15
+            184 < wind && wind < 201 -> 16
+            202 < wind && wind < 220 -> 17
+            221 < wind -> 17
             else -> 0
         }
     }
 
-    fun aqiToCh(aqi: Int): String {
-        return when (aqi / 50) {
-            0 -> "优"
-            1 -> "良"
-            2 -> "轻度污染"
-            3 -> "中度污染"
-            4, 5 -> "重度污染"
-            6,7,8,9,10 -> "严重污染"
-            else -> "严重污染"
+    fun aqiToCh(aqi: Double): String {
+        return when {
+            aqi >= 0 && aqi < 50 -> "优"
+            aqi >= 50 && aqi < 100 -> "良"
+            aqi >= 100 && aqi < 150 -> "轻度"
+            aqi >= 150 && aqi < 200 -> "中度"
+            aqi >= 200 && aqi < 300 -> "重度"
+            aqi >= 300 -> "严重"
+            else -> "优"
         }
     }
 
-    fun aqiToColor(context: Context, aqi: Int): Int {
-        return when (aqi / 50) {
-            0 -> ContextCompat.getColor(context, R.color.aqi_1)
-            1 -> ContextCompat.getColor(context, R.color.aqi_2)
-            2 -> ContextCompat.getColor(context, R.color.aqi_3)
-            3 -> ContextCompat.getColor(context, R.color.aqi_4)
-            4, 5 -> ContextCompat.getColor(context, R.color.aqi_5)
-            6,7,8,9,10 -> ContextCompat.getColor(context, R.color.aqi_6)
+    fun aqiToColor(context: Context, aqi: Double): Int {
+        return when {
+            aqi >= 0 && aqi < 50 -> ContextCompat.getColor(context, R.color.aqi_1)
+            aqi >= 50 && aqi < 100 -> ContextCompat.getColor(context, R.color.aqi_2)
+            aqi >= 100 && aqi < 150 -> ContextCompat.getColor(context, R.color.aqi_3)
+            aqi >= 150 && aqi < 200 -> ContextCompat.getColor(context, R.color.aqi_4)
+            aqi >= 200 && aqi < 300 -> ContextCompat.getColor(context, R.color.aqi_5)
+            aqi >= 300 -> ContextCompat.getColor(context, R.color.aqi_6)
             else -> ContextCompat.getColor(context, R.color.aqi_1)
         }
     }
+
+    fun getAndroiodScreenProperty(context: Context): List<Float> {
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val dm = DisplayMetrics()
+        wm.defaultDisplay.getMetrics(dm)
+        val width: Int = dm.widthPixels         // 屏幕宽度（像素）
+        val height: Int = dm.heightPixels       // 屏幕高度（像素）
+        val density: Float = dm.density         // 屏幕密度（0.75 / 1.0 / 1.5）
+        val densityDpi = dm.densityDpi     // 屏幕密度dpi（120 / 160 / 240）
+        // 屏幕宽度算法:屏幕宽度（像素）/屏幕密度
+        val screenWidth = (width / density).toInt()  // 屏幕宽度(dp)
+        val screenHeight = (height / density).toInt()// 屏幕高度(dp)
+
+        Logger.d("h_bl", "屏幕宽度（像素）：$width")
+        Logger.d("h_bl", "屏幕高度（像素）：$height")
+        Logger.d("h_bl", "屏幕密度（0.75 / 1.0 / 1.5）：$density")
+        Logger.d("h_bl", "屏幕密度dpi（120 / 160 / 240）：$densityDpi")
+        Logger.d("h_bl", "屏幕宽度（dp）：$screenWidth")
+        Logger.d("h_bl", "屏幕高度（dp）：$screenHeight")
+
+        return listOf(width.toFloat(), height.toFloat(), density)
+    }
+
+    /**
+     * 判断是否为今天(效率比较高)
+     *
+     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
+     * @return true今天 false不是
+     * @throws ParseException
+     */
+    @Throws(ParseException::class)
+    fun isToday(day: String): Boolean {
+        val pre = Calendar.getInstance()
+        val predate = Date(System.currentTimeMillis())
+        pre.time = predate
+        val cal = Calendar.getInstance()
+        val date = getDateFormat().parse(day)
+        cal.time = date
+        if (cal.get(Calendar.YEAR) == pre.get(Calendar.YEAR)) {
+            val diffDay = cal.get(Calendar.DAY_OF_YEAR) - pre.get(Calendar.DAY_OF_YEAR)
+            if (diffDay == 0) {
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * 判断是否为昨天(效率比较高)
+     *
+     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
+     * @return true今天 false不是
+     * @throws ParseException
+     */
+    @Throws(ParseException::class)
+    fun isYesterday(day: String): Boolean {
+
+        val pre = Calendar.getInstance()
+        val predate = Date(System.currentTimeMillis())
+        pre.time = predate
+
+        val cal = Calendar.getInstance()
+        val date = getDateFormat().parse(day)
+        cal.time = date
+
+        if (cal.get(Calendar.YEAR) == pre.get(Calendar.YEAR)) {
+            val diffDay = cal.get(Calendar.DAY_OF_YEAR) - pre.get(Calendar.DAY_OF_YEAR)
+
+            if (diffDay == -1) {
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * Date转换为中文
+     *
+     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
+     * @return 中文：9月8日
+     * @throws ParseException
+     */
+    fun dateToCh(day: String): String {
+        val cal = Calendar.getInstance()
+        val date = getDateFormat().parse(day)
+        cal.time = date
+        return "${cal.get(Calendar.MONTH)+1}月${cal.get(Calendar.DAY_OF_MONTH)}日"
+    }
+
+    /**
+     * Date转换为中文星期
+     *
+     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
+     * @return 中文星期：周一
+     * @throws ParseException
+     */
+    fun dateToWeekCh(day: String): String {
+        val cal = Calendar.getInstance()
+        val date = getDateFormat().parse(day)
+        cal.time = date
+        return when(cal.get(Calendar.DAY_OF_WEEK)) {
+            1-> "周日"
+            2-> "周一"
+            3-> "周二"
+            4-> "周三"
+            5-> "周四"
+            6-> "周五"
+            7-> "周六"
+            else -> "错误"
+        }
+    }
+
+    private fun getDateFormat(): SimpleDateFormat {
+        if (null == DateLocal.get()) {
+            DateLocal.set(SimpleDateFormat("yyyy-MM-dd", Locale.CHINA))
+        }
+        return DateLocal.get()
+    }
+
+    private val DateLocal = ThreadLocal<SimpleDateFormat>()
 
 }

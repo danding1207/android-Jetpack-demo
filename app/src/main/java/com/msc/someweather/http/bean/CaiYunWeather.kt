@@ -194,7 +194,7 @@ class CaiYunWeather {
             var pm10: Double = 0.toDouble()
             var skycon: String? = null
             var cloudrate: Double = 0.toDouble()
-            var aqi: Int = 0
+            var aqi: Double = 0.toDouble()
             var comfort: ComfortBean? = null
             var no2: Double = 0.toDouble()
             var visibility: Double = 0.toDouble()
