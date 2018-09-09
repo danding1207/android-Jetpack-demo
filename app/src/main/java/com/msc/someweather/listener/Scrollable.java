@@ -44,9 +44,9 @@ public interface Scrollable {
      * Implemented classes are expected to scroll to the exact Y pixels from the top,
      * but it depends on the type of the widget.
      *
-     * @param y Vertical position to scroll to.
+     * @param x Vertical position to scroll to.
      */
-    void scrollVerticallyTo(int y);
+    void scrollHorizontalTo(int x);
 
     /**
      * Return the current X of the scrollable view.

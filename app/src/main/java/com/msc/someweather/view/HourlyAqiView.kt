@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.msc.someweather.R
@@ -32,6 +33,7 @@ class HourlyAqiView : FrameLayout {
     var llApiTimeLine: LinearLayout? = null
     var llApiWind: LinearLayout? = null
     var llDailyAqi: LinearLayout? = null
+    var llCuttingBwTipAndChart: LinearLayout? = null
 
     var result: CaiYunWeather.ResultBean? = null
 
@@ -57,11 +59,11 @@ class HourlyAqiView : FrameLayout {
         llApiTimeLine = findViewById(R.id.ll_api_time_line)
         llApiWind = findViewById(R.id.ll_api_wind)
         llDailyAqi = findViewById(R.id.ll_daily_aqi)
+        llCuttingBwTipAndChart = findViewById(R.id.ll_cutting_bw_tip_and_chart)
 
         tv_y_1 = findViewById(R.id.tv_y_1)
         tv_y_2 = findViewById(R.id.tv_y_2)
         tv_y_3 = findViewById(R.id.tv_y_3)
-
 
         horizontalScrollViewHourlyAqi = findViewById(R.id.horizontalScrollView_hourly_aqi)
         horizontalScrollViewDailyAqi = findViewById(R.id.horizontalScrollView_daily_aqi)
@@ -73,10 +75,22 @@ class HourlyAqiView : FrameLayout {
         llApiChart!!.removeAllViews()
         llApiTimeLine!!.removeAllViews()
         llApiWind!!.removeAllViews()
+        llCuttingBwTipAndChart!!.removeAllViews()
 
         val baseHeight = resources.getDimensionPixelSize(R.dimen.hourly_aqi_view_base_height)
         val barWidth = resources.getDimensionPixelSize(R.dimen.hourly_aqi_view_bar_width)
         val barMarginWidth = resources.getDimensionPixelSize(R.dimen.hourly_aqi_view_bar_margin_width)
+
+        val barNum = if (result!!.hourly!!.aqi == null) 0 else result!!.hourly!!.aqi!!.size
+        val dailyNum = if (result!!.daily!!.aqi == null) 0 else result!!.daily!!.aqi!!.size
+
+        val barChartLength = barWidth * barNum + barMarginWidth * 2 * (barNum + 1) - (
+                UnitUtils.getAndroiodScreenProperty(context)[0].toInt() - baseHeight
+                )
+        val dailChartLength = (UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
+                / 5) * dailyNum - UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
+
+        val itemScrollBarLength = UnitUtils.getAndroiodScreenProperty(context)[0].toInt() * 3 / 5
 
         if (result != null &&
                 result!!.hourly != null &&
@@ -328,20 +342,35 @@ class HourlyAqiView : FrameLayout {
                         UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 5,
                         baseHeight * 3)
 
+                val scrollDis = ((if (index == 0) 0 else index - 1) * UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 5) / (1 + itemScrollBarLength.toFloat() / dailChartLength)
+
+                itemDailyTipView.setOnClickListener {
+                    horizontalScrollViewDailyAqi!!.scrollTo(scrollDis.toInt(), 0)
+                }
+
                 llDailyAqi!!.addView(itemDailyTipView, itemBarViewLayoutParams)
 
             }
 
+
         }
 
-        val barNum = if (result!!.hourly!!.aqi == null) 0 else result!!.hourly!!.aqi!!.size
-        val dailyNum = if (result!!.daily!!.aqi == null) 0 else result!!.daily!!.aqi!!.size
+        val itemScrollBar = ImageView(context)
 
-        val barChartLength = barWidth * barNum + barMarginWidth * 2 * (barNum + 1) - (
-                UnitUtils.getAndroiodScreenProperty(context)[0].toInt() - baseHeight
-                )
-        val dailChartLength = (UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
-                / 5) * dailyNum - UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
+        val itemScrollBarLayoutParams = LinearLayout.LayoutParams(
+                UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 5,
+                UnitUtils.dipTopx(context, 3f))
+        itemScrollBar.setImageResource(R.color.green)
+        itemScrollBarLayoutParams.leftMargin = UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 5
+        itemScrollBarLayoutParams.topMargin = UnitUtils.dipTopx(context, 5f)
+        itemScrollBarLayoutParams.bottomMargin = UnitUtils.dipTopx(context, 2f)
+        llCuttingBwTipAndChart!!.addView(itemScrollBar, itemScrollBarLayoutParams)
+
+
+//        itemScrollBarLength barChartLength
+//                x l
+//
+//                l * itemScrollBarLength / barChartLength
 
         Logger.e("widthPixels--->${UnitUtils.getAndroiodScreenProperty(context)[0].toInt()}")
         Logger.e("heightPixels--->${UnitUtils.getAndroiodScreenProperty(context)[1].toInt()}")
@@ -354,76 +383,12 @@ class HourlyAqiView : FrameLayout {
         Logger.e("barChartLength--->$barChartLength")
         Logger.e("dailChartLength--->$dailChartLength")
 
-//        val scrollViewCallbacks = object : ObservableHorizontalScrollViewCallbacks {
-//            override fun onScrollChanged(scrollView: ObservableHorizontalScrollView,
-//                                         scrollX: Int, firstScroll: Boolean,
-//                                         dragging: Boolean) {
-//
-//
-//                Logger.e("HourlyscrollX--->$scrollX")
-//
-//
-//                when (scrollView) {
-//                    horizontalScrollViewHourlyAqi -> {
-//                        horizontalScrollViewDailyAqi!!.scrollTo(scrollX * dailChartLength / barChartLength, 0)
-//
-//                    }
-//                    horizontalScrollViewDailyAqi -> {
-//                        horizontalScrollViewHourlyAqi!!.scrollTo(scrollX * barChartLength / dailChartLength, 0)
-//
-//                    }
-//                }
-//            }
-//
-//            override fun onDownMotionEvent() {
-//
-//            }
-//
-//            override fun onUpOrCancelMotionEvent(scrollState: ScrollState?) {
-//            }
-//
-//        }
-//
-//        horizontalScrollViewHourlyAqi!!.addScrollViewCallbacks(scrollViewCallbacks)
-//        horizontalScrollViewDailyAqi!!.addScrollViewCallbacks(object : ObservableHorizontalScrollViewCallbacks {
-//            override fun onScrollChanged(scrollView: ObservableHorizontalScrollView,
-//                                         scrollX: Int, firstScroll: Boolean,
-//                                         dragging: Boolean) {
-//                Logger.e("DailyscrollX--->$scrollX")
-//            }
-//
-//            override fun onDownMotionEvent() {
-//            }
-//
-//            override fun onUpOrCancelMotionEvent(scrollState: ScrollState?) {
-//            }
-//        })
 
-        val hourlyObservable = horizontalScrollViewHourlyAqi!!.onScrollChanged()
-                .doOnNext {
+        horizontalScrollViewHourlyAqi!!.bindView(horizontalScrollViewDailyAqi!!, llCuttingBwTipAndChart!!,
+                dailChartLength.toFloat() / barChartLength, itemScrollBarLength.toFloat() / barChartLength)
 
-                }
-                .subscribe {
-                    horizontalScrollViewDailyAqi!!.scrollTo(it * dailChartLength / barChartLength, 0)
-                }
-
-
-//        val dailyObservable =  horizontalScrollViewDailyAqi!!.onScrollChanged()
-//                .doOnNext {
-//
-//                }
-//                .subscribe {
-//                    horizontalScrollViewHourlyAqi!!.scrollTo(it * barChartLength / dailChartLength, 0)
-//                }
-
-
-//        Observable.combineLatest(hourlyObservable, dailyObservable,
-//                BiFunction<Int, Int, Int> { t1, t2 ->
-//
-//
-//                    return
-//
-//                })
+        horizontalScrollViewDailyAqi!!.bindView(horizontalScrollViewHourlyAqi!!, llCuttingBwTipAndChart!!,
+                barChartLength.toFloat() / dailChartLength, itemScrollBarLength.toFloat() / dailChartLength)
 
     }
 
