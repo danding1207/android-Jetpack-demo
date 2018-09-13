@@ -84,12 +84,12 @@ class HourlyTemperratureView : FrameLayout {
         val barWidth = UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 23f
         val barMarginWidth = resources.getDimensionPixelSize(R.dimen.hourly_temperrature_view_linear_graph_margin_width)
 
-        val barNum = if (result!!.hourly!!.aqi == null) 0 else result!!.hourly!!.aqi!!.size
-        val dailyNum = if (result!!.daily!!.aqi == null) 0 else result!!.daily!!.aqi!!.size
+        val barNum = if (result == null || result!!.hourly == null || result!!.hourly!!.temperature == null) 0 else result!!.hourly!!.temperature!!.size
+        val dailyNum = if (result == null || result!!.daily == null || result!!.daily!!.temperature == null) 0 else result!!.daily!!.temperature!!.size
 
-        val barChartLength = barWidth * barNum + barMarginWidth * 2 - (
-                UnitUtils.getAndroiodScreenProperty(context)[0].toInt() - baseHeight
-                )
+        val barChartLength = barWidth * barNum + barMarginWidth * 2 -
+                UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
+
         val dailChartLength = (UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
                 / 5) * dailyNum - UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
 

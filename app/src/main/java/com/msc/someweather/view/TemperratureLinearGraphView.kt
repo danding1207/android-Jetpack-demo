@@ -9,6 +9,7 @@ import com.msc.someweather.R
 import com.msc.someweather.http.bean.CaiYunWeather
 import com.msc.someweather.http.bean.CaiYunWeather.ResultBean.DailyBean.TemperatureBeanX
 import com.msc.someweather.utilities.UnitUtils
+import com.orhanobut.logger.Logger
 
 class TemperratureLinearGraphView : View {
 
@@ -55,6 +56,7 @@ class TemperratureLinearGraphView : View {
         mTextPaint.textSize = 28f
 //        setLayerType(View.LAYER_TYPE_SOFTWARE, mFillPaint)
 
+        setWillNotDraw(false)
     }
 
     fun setResult(result: CaiYunWeather.ResultBean) {
@@ -86,9 +88,20 @@ class TemperratureLinearGraphView : View {
         val barMarginWidth = resources.getDimensionPixelSize(R.dimen.hourly_temperrature_view_linear_graph_margin_width)
         val width = (UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 23) * hourlyNum + barMarginWidth * 2
         val height = measureDimension(heightMeasureSpec)
+        //17664
         //将计算的宽和高设置进去，保存，最后一步一定要有
         if (width != 0 && height != 0)
             setMeasuredDimension(width, height)
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        Logger.e("w--->$w")
+        Logger.e("h--->$h")
+        Logger.e("oldw--->$oldw")
+        Logger.e("oldh--->$oldh")
+
     }
 
     /**
