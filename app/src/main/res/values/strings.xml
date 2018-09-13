@@ -33,7 +33,7 @@
 
     <string name="aqi_title" translation_description="Title for the plant details screen where the user can see the details for a specific plant.">
     Aqi</string>
-
+    <string name="temperrature_title" >temperrature(℃)</string>
 
 
     <string name="navigation_drawer_header_content_description" translation_description="Content description for the image that is shown at the top of the navigation drawer.">Navigation drawer header logo</string>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.msc.someweather.view.ObservableHorizontalScrollView
+        android:id="@+id/horizontalScrollView_hourly_aqi"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <com.msc.someweather.view.TemperratureLinearGraphView
+                android:id="@+id/temperratureLinearGraphView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/hourly_temperrature_view_linear_graph_height"
+                android:background="@color/aqi_6"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_api_wind"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/hourly_aqi_view_base_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:background="@color/aqi_1"
+                >
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_api_time_line"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/hourly_aqi_view_base_height"
+                android:orientation="horizontal"
+                android:background="@color/aqi_1"
+                >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.msc.someweather.view.ObservableHorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_cutting_bw_tip_and_chart"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
+        android:background="@color/gray_cuttingline"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView_hourly_aqi"
+        android:orientation="horizontal"
+        />
+
+    <com.msc.someweather.view.ObservableHorizontalScrollView
+        android:id="@+id/horizontalScrollView_daily_temperrature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_cutting_bw_tip_and_chart">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_daily_temperrature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+
+            </LinearLayout>
+
+            <com.msc.someweather.view.TemperratureLinearChartView
+                android:id="@+id/temperratureLinearChartView"
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/hourly_temperrature_view_linear_bar_height"
+                />
+
+        </LinearLayout>
+
+    </com.msc.someweather.view.ObservableHorizontalScrollView>
+
+</android.support.constraint.ConstraintLayout>
+

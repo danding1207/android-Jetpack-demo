@@ -146,7 +146,7 @@ class WeatherFragment : Fragment() {
             /**
              * 天气
              */
-            tv_name.text = UnitUtils.temperatureToCh(bean!!.result!!.realtime!!.skycon!!)
+            tv_name.text = UnitUtils.skyconToCh(bean!!.result!!.realtime!!.skycon!!)
 
             /**
              * 风向 和 风速
@@ -194,6 +194,7 @@ class WeatherFragment : Fragment() {
             tv_dressing.text = "${dailyDressing.desc}"
             iv_dressing.setImageDrawable(DrawableUtils.tintDrawable(iv_dressing.drawable,
                     ColorStateList.valueOf(Color.WHITE)))
+            ll_dressing.visibility = View.VISIBLE
             ll_dressing.setOnClickListener {
                 adapter.toggle()
             }
@@ -255,8 +256,19 @@ class WeatherFragment : Fragment() {
 
             }
 
-
+            /**
+             * 当前温度
+             */
             tv_tmp.text = "${bean.result!!.realtime!!.temperature}℃"
+            tv_tmp.setOnClickListener {
+
+                val direction = WeatherFragmentDirections.ActionWeatherFragmentToTemperratureFragment(
+                        Gson().toJson(
+                                bean.result))
+
+                view!!.findNavController().navigate(direction)
+
+            }
 
             /**
              * 空气质量指数
@@ -264,6 +276,7 @@ class WeatherFragment : Fragment() {
             tv_aqi.text = "${bean.result!!.realtime!!.aqi} ${UnitUtils.aqiToCh(bean.result!!.realtime!!.aqi)}"
             iv_aqi.setImageDrawable(DrawableUtils.tintDrawable(iv_aqi.drawable,
                     ColorStateList.valueOf(Color.WHITE)))
+            ll_aqi.visibility = View.VISIBLE
             ll_aqi.setOnClickListener {
 
                 val direction = WeatherFragmentDirections.ActionWeatherFragmentToAqiFragment(

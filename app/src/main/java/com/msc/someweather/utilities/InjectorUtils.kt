@@ -62,6 +62,10 @@ object InjectorUtils {
         return AqiViewModelFactory(fragment)
     }
 
+    fun provideTemperratureViewModelFactory(fragment: Fragment): TemperratureViewModelFactory {
+        return TemperratureViewModelFactory(fragment)
+    }
+
     fun providePlantDetailViewModelFactory(
         context: Context,
         plantId: String

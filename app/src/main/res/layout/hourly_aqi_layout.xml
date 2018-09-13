@@ -115,7 +115,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_api_chart"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_aqi_view_base_height_4"
                 android:gravity="bottom"
                 android:orientation="horizontal">
@@ -125,7 +125,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_api_wind"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_aqi_view_base_height"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -135,7 +135,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_api_time_line"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_aqi_view_base_height"
                 android:orientation="horizontal"
 
@@ -175,7 +175,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_daily_aqi"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_aqi_view_base_height_3"
                 android:gravity="bottom"
                 android:orientation="horizontal">
@@ -183,9 +183,17 @@
 
             </LinearLayout>
 
+            <com.msc.someweather.view.ApiLinearChartView
+                android:id="@+id/apiLinearChartView"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/hourly_aqi_view_linear_bar_height"
+                />
+
         </LinearLayout>
 
     </com.msc.someweather.view.ObservableHorizontalScrollView>
+
 
 
 </android.support.constraint.ConstraintLayout>

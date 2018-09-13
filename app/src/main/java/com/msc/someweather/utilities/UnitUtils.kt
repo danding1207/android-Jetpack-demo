@@ -1,18 +1,15 @@
 package com.msc.someweather.utilities
 
 import android.content.Context
-import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import com.msc.someweather.R
 import android.util.DisplayMetrics
-import android.support.v4.content.ContextCompat.getSystemService
 import android.view.WindowManager
+import com.msc.someweather.R
 import com.orhanobut.logger.Logger
-import android.text.format.DateFormat.getDateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 object UnitUtils {
 
@@ -69,7 +66,7 @@ object UnitUtils {
         return (spValue * fontScale + 0.5f).toInt()
     }
 
-    fun temperatureToCh(temperature: String): String {
+    fun skyconToCh(temperature: String): String {
         return when (temperature) {
             "HAZE" -> "霾"
             "RAIN" -> "雨"
@@ -79,6 +76,19 @@ object UnitUtils {
             "CLOUDY" -> "多云"
             "CLEAR_DAY" -> "晴天"
             else -> "未知"
+        }
+    }
+
+    fun skyconToDrawable(context: Context, temperature: String): Drawable {
+        return when (temperature) {
+            "HAZE" -> ContextCompat.getDrawable(context, R.drawable.haze)!!
+            "RAIN" -> ContextCompat.getDrawable(context, R.drawable.rain)!!
+            "CLEAR_NIGHT" -> ContextCompat.getDrawable(context, R.drawable.clear_night)!!
+            "PARTLY_CLOUDY_NIGHT" -> ContextCompat.getDrawable(context, R.drawable.partly_cloudy_night)!!
+            "PARTLY_CLOUDY_DAY" -> ContextCompat.getDrawable(context, R.drawable.partly_cloudy_day)!!
+            "CLOUDY" -> ContextCompat.getDrawable(context, R.drawable.cloudy)!!
+            "CLEAR_DAY" -> ContextCompat.getDrawable(context, R.drawable.clear_day)!!
+            else -> ContextCompat.getDrawable(context, R.drawable.clear_day)!!
         }
     }
 
@@ -174,17 +184,17 @@ object UnitUtils {
         val width: Int = dm.widthPixels         // 屏幕宽度（像素）
         val height: Int = dm.heightPixels       // 屏幕高度（像素）
         val density: Float = dm.density         // 屏幕密度（0.75 / 1.0 / 1.5）
-        val densityDpi = dm.densityDpi     // 屏幕密度dpi（120 / 160 / 240）
-        // 屏幕宽度算法:屏幕宽度（像素）/屏幕密度
-        val screenWidth = (width / density).toInt()  // 屏幕宽度(dp)
-        val screenHeight = (height / density).toInt()// 屏幕高度(dp)
+//        val densityDpi = dm.densityDpi     // 屏幕密度dpi（120 / 160 / 240）
+//        // 屏幕宽度算法:屏幕宽度（像素）/屏幕密度
+//        val screenWidth = (width / density).toInt()  // 屏幕宽度(dp)
+//        val screenHeight = (height / density).toInt()// 屏幕高度(dp)
 
-        Logger.d("h_bl", "屏幕宽度（像素）：$width")
-        Logger.d("h_bl", "屏幕高度（像素）：$height")
-        Logger.d("h_bl", "屏幕密度（0.75 / 1.0 / 1.5）：$density")
-        Logger.d("h_bl", "屏幕密度dpi（120 / 160 / 240）：$densityDpi")
-        Logger.d("h_bl", "屏幕宽度（dp）：$screenWidth")
-        Logger.d("h_bl", "屏幕高度（dp）：$screenHeight")
+//        Logger.d("h_bl", "屏幕宽度（像素）：$width")
+//        Logger.d("h_bl", "屏幕高度（像素）：$height")
+//        Logger.d("h_bl", "屏幕密度（0.75 / 1.0 / 1.5）：$density")
+//        Logger.d("h_bl", "屏幕密度dpi（120 / 160 / 240）：$densityDpi")
+//        Logger.d("h_bl", "屏幕宽度（dp）：$screenWidth")
+//        Logger.d("h_bl", "屏幕高度（dp）：$screenHeight")
 
         return listOf(width.toFloat(), height.toFloat(), density)
     }
@@ -286,5 +296,46 @@ object UnitUtils {
     }
 
     private val DateLocal = ThreadLocal<SimpleDateFormat>()
+
+
+    /**
+     * 计算两个日期型的时间相差多少时间
+     * @param startDate  开始日期
+     * @param endDate    结束日期
+     * @return
+     */
+    fun twoDateDistance(startDate: Date?, endDate: Date?): String? {
+
+        if (startDate == null || endDate == null) {
+            return null
+        }
+        var timeLong = endDate.time - startDate.time
+        when {
+            timeLong < 1000 -> return (timeLong).toString() + "毫秒前"
+            timeLong < 60 * 1000 -> return (timeLong / 1000).toString() + "秒前"
+            timeLong < 60 * 60 * 1000 -> {
+                timeLong = timeLong / 1000 / 60
+                return timeLong.toString() + "分钟前"
+            }
+            timeLong < 60 * 60 * 24 * 1000 -> {
+                timeLong = timeLong / 60 / 60 / 1000
+                return timeLong.toString() + "小时前"
+            }
+            timeLong < 60 * 60 * 24 * 1000 * 7 -> {
+                timeLong = timeLong / 1000 / 60 / 60 / 24
+                return timeLong.toString() + "天前"
+            }
+            timeLong < 60 * 60 * 24 * 1000 * 7 * 4 -> {
+                timeLong = timeLong / 1000 / 60 / 60 / 24 / 7
+                return timeLong.toString() + "周前"
+            }
+            else -> {
+                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                sdf.timeZone = TimeZone.getTimeZone("GMT+08:00")
+                return sdf.format(startDate)
+            }
+        }
+    }
+
 
 }

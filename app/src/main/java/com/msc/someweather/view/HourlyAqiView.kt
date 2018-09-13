@@ -15,17 +15,11 @@ import android.widget.TextView
 import com.msc.someweather.R
 import com.msc.someweather.http.bean.CaiYunWeather
 import com.msc.someweather.http.bean.CaiYunWeather.ResultBean.HourlyBean.WindBean
-import com.msc.someweather.listener.ObservableHorizontalScrollViewCallbacks
 import com.msc.someweather.utilities.DrawableUtils
 import com.msc.someweather.utilities.UnitUtils
 import com.orhanobut.logger.Logger
-import io.reactivex.Observable
-import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Function
 import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.Date
-
+import java.util.*
 
 class HourlyAqiView : FrameLayout {
 
@@ -43,6 +37,8 @@ class HourlyAqiView : FrameLayout {
 
     var horizontalScrollViewHourlyAqi: ObservableHorizontalScrollView? = null
     var horizontalScrollViewDailyAqi: ObservableHorizontalScrollView? = null
+
+    var apiLinearChartView: ApiLinearChartView? = null
 
     constructor(context: Context) : super(context) {}
 
@@ -68,9 +64,15 @@ class HourlyAqiView : FrameLayout {
         horizontalScrollViewHourlyAqi = findViewById(R.id.horizontalScrollView_hourly_aqi)
         horizontalScrollViewDailyAqi = findViewById(R.id.horizontalScrollView_daily_aqi)
 
+
+        apiLinearChartView = findViewById(R.id.apiLinearChartView)
     }
 
     fun invalidateView() {
+
+        Logger.e("HourlyAqiView：startTime->${System.currentTimeMillis()}")
+
+        apiLinearChartView!!.setResult(result!!)
 
         llApiChart!!.removeAllViews()
         llApiTimeLine!!.removeAllViews()
@@ -91,6 +93,9 @@ class HourlyAqiView : FrameLayout {
                 / 5) * dailyNum - UnitUtils.getAndroiodScreenProperty(context)[0].toInt()
 
         val itemScrollBarLength = UnitUtils.getAndroiodScreenProperty(context)[0].toInt() * 3 / 5
+
+        val nowDate1 = Calendar.getInstance().time
+        Logger.e("HourlyAqiView：startTime->${System.currentTimeMillis()}")
 
         if (result != null &&
                 result!!.hourly != null &&
@@ -225,6 +230,11 @@ class HourlyAqiView : FrameLayout {
 
         }
 
+        val nowDate2 = Calendar.getInstance().time
+
+        Logger.e("HourlyAqiView：柱形图时间间隔->${UnitUtils.twoDateDistance(nowDate1, nowDate2)}")
+
+        Logger.e("HourlyAqiView：startTime->${System.currentTimeMillis()}")
 
         if (result != null &&
                 result!!.hourly != null &&
@@ -310,6 +320,11 @@ class HourlyAqiView : FrameLayout {
 
         }
 
+        val nowDate3 = Calendar.getInstance().time
+
+        Logger.e("HourlyAqiView：风速时间间隔->${UnitUtils.twoDateDistance(nowDate2, nowDate3)}")
+
+        Logger.e("HourlyAqiView：startTime->${System.currentTimeMillis()}")
 
         if (result != null &&
                 result!!.daily != null &&
@@ -345,7 +360,7 @@ class HourlyAqiView : FrameLayout {
                 val scrollDis = ((if (index == 0) 0 else index - 1) * UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 5) / (1 + itemScrollBarLength.toFloat() / dailChartLength)
 
                 itemDailyTipView.setOnClickListener {
-                    horizontalScrollViewDailyAqi!!.scrollTo(scrollDis.toInt(), 0)
+                    horizontalScrollViewDailyAqi!!.smoothScrollTo(scrollDis.toInt(), 0)
                 }
 
                 llDailyAqi!!.addView(itemDailyTipView, itemBarViewLayoutParams)
@@ -389,6 +404,12 @@ class HourlyAqiView : FrameLayout {
 
         horizontalScrollViewDailyAqi!!.bindView(horizontalScrollViewHourlyAqi!!, llCuttingBwTipAndChart!!,
                 barChartLength.toFloat() / dailChartLength, itemScrollBarLength.toFloat() / dailChartLength)
+
+        val nowDate4 = Calendar.getInstance().time
+
+        Logger.e("HourlyAqiView：日期时间间隔->${UnitUtils.twoDateDistance(nowDate3, nowDate4)}")
+
+        Logger.e("HourlyAqiView：startTime->${System.currentTimeMillis()}")
 
     }
 
