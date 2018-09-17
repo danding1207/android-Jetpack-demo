@@ -66,8 +66,8 @@ object UnitUtils {
         return (spValue * fontScale + 0.5f).toInt()
     }
 
-    fun skyconToCh(temperature: String): String {
-        return when (temperature) {
+    fun skyconToCh(skycon: String): String {
+        return when (skycon) {
             "HAZE" -> "霾"
             "RAIN" -> "雨"
             "CLEAR_NIGHT" -> "晴夜"
@@ -79,8 +79,21 @@ object UnitUtils {
         }
     }
 
-    fun skyconToDrawable(context: Context, temperature: String): Drawable {
-        return when (temperature) {
+    fun skyconToColor(context: Context, skycon: String): Int {
+        return when (skycon) {
+            "HAZE" -> ContextCompat.getColor(context, R.color.aqi_1)
+            "RAIN" -> ContextCompat.getColor(context, R.color.aqi_1)
+            "CLEAR_NIGHT" -> ContextCompat.getColor(context, R.color.aqi_1)
+            "PARTLY_CLOUDY_NIGHT" -> ContextCompat.getColor(context, R.color.aqi_1)
+            "PARTLY_CLOUDY_DAY" -> ContextCompat.getColor(context, R.color.aqi_1)
+            "CLOUDY" -> ContextCompat.getColor(context, R.color.aqi_1)
+            "CLEAR_DAY" -> ContextCompat.getColor(context, R.color.aqi_1)
+            else -> ContextCompat.getColor(context, R.color.aqi_1)
+        }
+    }
+
+    fun skyconToDrawable(context: Context, skycon: String): Drawable {
+        return when (skycon) {
             "HAZE" -> ContextCompat.getDrawable(context, R.drawable.haze)!!
             "RAIN" -> ContextCompat.getDrawable(context, R.drawable.rain)!!
             "CLEAR_NIGHT" -> ContextCompat.getDrawable(context, R.drawable.clear_night)!!

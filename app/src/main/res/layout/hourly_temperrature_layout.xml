@@ -26,19 +26,15 @@
                 android:id="@+id/temperratureLinearGraphView"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_temperrature_view_linear_graph_height"
-                android:background="@color/aqi_6"
                 />
 
             <LinearLayout
-                android:id="@+id/ll_api_wind"
+                android:id="@+id/ll_temperrature_skycon"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_aqi_view_base_height"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:background="@color/aqi_1"
                 >
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -46,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/hourly_aqi_view_base_height"
                 android:orientation="horizontal"
-                android:background="@color/aqi_1"
                 >
 
             </LinearLayout>
@@ -59,11 +54,10 @@
         android:id="@+id/ll_cutting_bw_tip_and_chart"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_marginTop="@dimen/hourly_aqi_view_base_height"
+        android:layout_marginTop="24dp"
         android:background="@color/gray_cuttingline"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView_hourly_aqi"
         android:orientation="horizontal"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView_hourly_aqi" />
 
     <com.msc.someweather.view.ObservableHorizontalScrollView
         android:id="@+id/horizontalScrollView_daily_temperrature"

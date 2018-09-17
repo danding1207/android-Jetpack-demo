@@ -79,6 +79,7 @@ class CaiYunWeather {
 
                 var value: String? = null
                 var datetime: String? = null
+                var length: Int = 0
             }
 
             class CloudrateBean {

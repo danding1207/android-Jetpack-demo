@@ -32,6 +32,8 @@
     <dimen name="navigation_drawer_header_padding">16dp</dimen>
     <dimen name="navigation_drawer_image_width">100dp</dimen>
 
+    <dimen name="hourly_aqi_view_base_time_linear_text_size">3sp</dimen>
+    <dimen name="hourly_aqi_view_base_wind_or_temperrature_text_size">4sp</dimen>
 
     <dimen name="hourly_aqi_view_base_height">40dp</dimen>
     <dimen name="hourly_aqi_view_y_width">40dp</dimen>
@@ -39,11 +41,12 @@
     <dimen name="hourly_aqi_view_base_height_4">160dp</dimen>
     <dimen name="hourly_aqi_view_base_height_6">240dp</dimen>
     <dimen name="hourly_aqi_view_base_height_half">20dp</dimen>
-    <dimen name="hourly_aqi_view_bar_width">7dp</dimen>
+    <dimen name="hourly_aqi_view_bar_width">5dp</dimen>
     <dimen name="hourly_aqi_view_bar_margin_width">1dp</dimen>
 
     <dimen name="hourly_aqi_view_linear_bar_height">30dp</dimen>
 
+    <dimen name="hourly_temperrature_view_linear_bar_width">12dp</dimen>
     <dimen name="hourly_temperrature_view_linear_bar_height">120dp</dimen>
     <dimen name="hourly_temperrature_view_linear_bar_center_height">80dp</dimen>
 

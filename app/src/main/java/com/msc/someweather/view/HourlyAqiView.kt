@@ -94,6 +94,10 @@ class HourlyAqiView : FrameLayout {
 
         val itemScrollBarLength = UnitUtils.getAndroiodScreenProperty(context)[0].toInt() * 3 / 5
 
+        val timeLinearTextSize = resources.getDimensionPixelSize(R.dimen.hourly_aqi_view_base_time_linear_text_size)
+        val windOrTemperratureTextSize = resources.getDimensionPixelSize(R.dimen.hourly_aqi_view_base_wind_or_temperrature_text_size)
+
+
         val nowDate1 = Calendar.getInstance().time
         Logger.e("HourlyAqiView：startTime->${System.currentTimeMillis()}")
 
@@ -171,8 +175,7 @@ class HourlyAqiView : FrameLayout {
                                     simpleDateFormat.parse(it.datetime))
                         }
 
-                        itemTimeView.textSize =
-                                UnitUtils.sp2px(context, 4f).toFloat()
+                        itemTimeView.textSize = timeLinearTextSize.toFloat()
                         itemTimeView.setTextColor(ContextCompat.getColor(context, R.color.gray))
                         llApiTimeLine!!.addView(itemTimeView, itemTimeViewLayoutParams)
                     }
@@ -183,8 +186,7 @@ class HourlyAqiView : FrameLayout {
                                 baseHeight)
                         itemTimeView.gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
                         itemTimeView.text = "07:00"
-                        itemTimeView.textSize =
-                                UnitUtils.sp2px(context, 4f).toFloat()
+                        itemTimeView.textSize = timeLinearTextSize.toFloat()
                         itemTimeView.setTextColor(ContextCompat.getColor(context, R.color.gray))
                         llApiTimeLine!!.addView(itemTimeView, itemTimeViewLayoutParams)
                     }
@@ -195,8 +197,7 @@ class HourlyAqiView : FrameLayout {
                                 baseHeight)
                         itemTimeView.gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
                         itemTimeView.text = "11:00"
-                        itemTimeView.textSize =
-                                UnitUtils.sp2px(context, 4f).toFloat()
+                        itemTimeView.textSize = timeLinearTextSize.toFloat()
                         itemTimeView.setTextColor(ContextCompat.getColor(context, R.color.gray))
                         llApiTimeLine!!.addView(itemTimeView, itemTimeViewLayoutParams)
                     }
@@ -207,8 +208,7 @@ class HourlyAqiView : FrameLayout {
                                 baseHeight)
                         itemTimeView.gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
                         itemTimeView.text = "15:00"
-                        itemTimeView.textSize =
-                                UnitUtils.sp2px(context, 4f).toFloat()
+                        itemTimeView.textSize = timeLinearTextSize.toFloat()
                         itemTimeView.setTextColor(ContextCompat.getColor(context, R.color.gray))
                         llApiTimeLine!!.addView(itemTimeView, itemTimeViewLayoutParams)
                     }
@@ -219,8 +219,7 @@ class HourlyAqiView : FrameLayout {
                                 baseHeight)
                         itemTimeView.gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
                         itemTimeView.text = "19:00"
-                        itemTimeView.textSize =
-                                UnitUtils.sp2px(context, 4f).toFloat()
+                        itemTimeView.textSize = timeLinearTextSize.toFloat()
                         itemTimeView.setTextColor(ContextCompat.getColor(context, R.color.gray))
                         llApiTimeLine!!.addView(itemTimeView, itemTimeViewLayoutParams)
                     }
@@ -291,8 +290,7 @@ class HourlyAqiView : FrameLayout {
                     itemWindText.compoundDrawablePadding = 4
                 }
 
-                itemWindText.textSize =
-                        UnitUtils.sp2px(context, 4f).toFloat()
+                itemWindText.textSize = windOrTemperratureTextSize.toFloat()
                 itemWindText.setTextColor(ContextCompat.getColor(context, R.color.black))
 //                itemWindView.setBackgroundColor(ContextCompat.getColor(context, R.color.gray_cuttingline))
                 itemWindView.setBackgroundResource(R.drawable.wind_bar_bg)

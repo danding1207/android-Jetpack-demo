@@ -9,10 +9,10 @@ import com.msc.someweather.R
 import com.msc.someweather.http.bean.CaiYunWeather
 import com.msc.someweather.http.bean.CaiYunWeather.ResultBean.DailyBean.TemperatureBeanX
 import com.msc.someweather.utilities.UnitUtils
+import com.orhanobut.logger.Logger
 
 class TemperratureLinearChartView : View {
 
-    //    private lateinit var surfaceHolder: SurfaceHolder
     private lateinit var mFillPaint: Paint
     private lateinit var mTextPaint: Paint
 
@@ -35,8 +35,6 @@ class TemperratureLinearChartView : View {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-//        surfaceHolder = holder
-//        surfaceHolder.addCallback(this)
 
         mFillPaint = Paint()
         mFillPaint.style = Paint.Style.STROKE
@@ -56,7 +54,7 @@ class TemperratureLinearChartView : View {
         mTextPaint.color = ContextCompat.getColor(context, R.color.black)
         mTextPaint.strokeJoin = Paint.Join.MITER
         mTextPaint.textSize = 28f
-//        setLayerType(View.LAYER_TYPE_SOFTWARE, mFillPaint)
+        setLayerType(View.LAYER_TYPE_SOFTWARE, mFillPaint)
 
     }
 
@@ -90,7 +88,18 @@ class TemperratureLinearChartView : View {
         val width = (UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 5) * dailyNum
         val height = measureDimension(heightMeasureSpec)
         //将计算的宽和高设置进去，保存，最后一步一定要有
-        setMeasuredDimension(width, height)
+        if (width != 0 && height != 0)
+            setMeasuredDimension(width, height)
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        Logger.e("w--->$w")
+        Logger.e("h--->$h")
+        Logger.e("oldw--->$oldw")
+        Logger.e("oldh--->$oldh")
+
     }
 
     /**
@@ -166,7 +175,7 @@ class TemperratureLinearChartView : View {
                                 +2*maxHeight,
                         mTextPaint)
 
-                if (index != result!!.daily!!.temperature!!.size - 1) {
+                if (index < result!!.daily!!.temperature!!.size - 1) {
 
 
                     if(index == 0) {

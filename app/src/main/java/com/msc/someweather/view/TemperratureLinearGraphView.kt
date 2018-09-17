@@ -40,11 +40,11 @@ class TemperratureLinearGraphView : View {
         mFillPaint.style = Paint.Style.STROKE
         mFillPaint.strokeCap = Paint.Cap.ROUND
         mFillPaint.isAntiAlias = true
-        mFillPaint.strokeWidth = 3f
-        mFillPaint.color = ContextCompat.getColor(context, R.color.green)
+        mFillPaint.strokeWidth = 2f
+        mFillPaint.color = ContextCompat.getColor(context, R.color.aqi_3)
         mFillPaint.strokeJoin = Paint.Join.ROUND
         mFillPaint.pathEffect = CornerPathEffect(200f)
-        setLayerType(View.LAYER_TYPE_SOFTWARE, mFillPaint)
+//        setLayerType(View.LAYER_TYPE_SOFTWARE, mFillPaint)
 
         mTextPaint = Paint()
         mTextPaint.style = Paint.Style.FILL
@@ -56,7 +56,6 @@ class TemperratureLinearGraphView : View {
         mTextPaint.textSize = 28f
 //        setLayerType(View.LAYER_TYPE_SOFTWARE, mFillPaint)
 
-        setWillNotDraw(false)
     }
 
     fun setResult(result: CaiYunWeather.ResultBean) {
@@ -79,16 +78,19 @@ class TemperratureLinearGraphView : View {
 
             step = (maxValue!!.max - minValue!!.min) / linearBarHeight
 
+            barMarginWidth = resources.getDimensionPixelSize(R.dimen.hourly_temperrature_view_linear_graph_margin_width)
+
+
             invalidate()
         }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val hourlyNum = if (result!!.hourly!!.temperature == null) 0 else result!!.hourly!!.temperature!!.size
+        val hourlyNum = if (result == null || result!!.hourly == null || result!!.hourly!!.temperature == null) 0 else result!!.hourly!!.temperature!!.size
+        barWidth = resources.getDimensionPixelSize(R.dimen.hourly_temperrature_view_linear_bar_width)
         val barMarginWidth = resources.getDimensionPixelSize(R.dimen.hourly_temperrature_view_linear_graph_margin_width)
-        val width = (UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 23) * hourlyNum + barMarginWidth * 2
+        val width = barWidth * hourlyNum + barMarginWidth * 2
         val height = measureDimension(heightMeasureSpec)
-        //17664
         //将计算的宽和高设置进去，保存，最后一步一定要有
         if (width != 0 && height != 0)
             setMeasuredDimension(width, height)
@@ -104,6 +106,17 @@ class TemperratureLinearGraphView : View {
 
     }
 
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+        Logger.e("changed--->$changed")
+        Logger.e("left--->$left")
+        Logger.e("top--->$top")
+        Logger.e("right--->$right")
+        Logger.e("bottom--->$bottom")
+
+    }
+
     /**
      * @param measureSpec   父控件传来的widthMeasureSpec，heightMeasureSpec
      * @return  结果
@@ -114,7 +127,7 @@ class TemperratureLinearGraphView : View {
         val specSize = View.MeasureSpec.getSize(measureSpec)
 
         //1,layout中自定义组件给出来确定的值，比如100dp
-        //2,layout中自定义组件使用的是match_parent，但父控件的size已经可以确定了，比如设置的具体的值或者match_parent
+        //2,layout中自定义组件使用的是match_parent，但父控件的si已ze经可以确定了，比如设置的具体的值或者match_parent
         result = when (specMode) {
             View.MeasureSpec.EXACTLY -> specSize
             View.MeasureSpec.AT_MOST -> specSize
@@ -130,6 +143,8 @@ class TemperratureLinearGraphView : View {
     var step: Double = 0.0
     var linearBarHeight = 0
     var textHeight = 0
+    var barMarginWidth = 0
+    var barWidth = 0
 
     override fun onDraw(canvas: Canvas) {
 
@@ -175,19 +190,19 @@ class TemperratureLinearGraphView : View {
 //                                +2*maxHeight,
 //                        mTextPaint)
 
-                if (index != result!!.daily!!.temperature!!.size - 1) {
-
+                if (index < result!!.hourly!!.temperature!!.size - 1) {
 
                     if (index == 0) {
 
                         temperaturePath.moveTo(
-                                index * UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 23f,
+                                (index * barWidth
+                                        + barMarginWidth).toFloat(),
                                 linearBarHeight - ((result!!.hourly!!.temperature!![index].value - minValue!!.min) / step).toFloat()
                                         + textHeight)
 
                     }
 
-                    temperaturePath.lineTo((index + 1) * UnitUtils.getAndroiodScreenProperty(context)[0].toInt() / 23f,
+                    temperaturePath.lineTo((index + 1) * barWidth.toFloat(),
                             linearBarHeight - ((result!!.hourly!!.temperature!![index + 1].value - minValue!!.min) / step).toFloat()
                                     + textHeight)
 
